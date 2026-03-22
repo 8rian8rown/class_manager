@@ -14,7 +14,7 @@
     --border2: #353b55;
     --text: #e2e6f0;
     --text2: #8892b0;
-    --text3: #4a5270;
+    --text3: #6b7394;
     --accent: #5b8cff;
     --accent-dim: #1e2f5c;
     --todo: #38bdf8;
@@ -26,6 +26,13 @@
     --danger: #f87171;
     --hold: #a78bfa;
     --hold-dim: #1e1640;
+    --todo-border: rgba(56,189,248,0.3);
+    --working-border: rgba(245,158,11,0.3);
+    --done-border: rgba(52,211,153,0.3);
+    --hold-border: rgba(167,139,250,0.3);
+    --danger-bg: rgba(248,113,113,0.08);
+    --danger-bg-strong: rgba(248,113,113,0.15);
+    --hold-bg: rgba(167,139,250,0.2);
     --mono: 'IBM Plex Mono', monospace;
     --sans: 'IBM Plex Sans', sans-serif;
   }
@@ -35,13 +42,20 @@
     color-scheme: light;
     --bg: #f4f5f7; --surface: #ffffff; --surface2: #f0f1f4;
     --border: #d8dbe3; --border2: #c4c8d4;
-    --text: #1a1d27; --text2: #4a5068; --text3: #8890a6;
+    --text: #1a1d27; --text2: #4a5068; --text3: #6d7590;
     --accent: #2c5ce6; --accent-dim: #e8eefb;
     --todo: #0c7fda; --todo-dim: #e4f2fc;
     --working: #c87a08; --working-dim: #fdf3e0;
     --done: #18864f; --done-dim: #e3f5ec;
     --danger: #d63031;
     --hold: #7c4dff; --hold-dim: #f0ebff;
+    --todo-border: rgba(12,127,218,0.3);
+    --working-border: rgba(200,122,8,0.3);
+    --done-border: rgba(24,134,79,0.3);
+    --hold-border: rgba(124,77,255,0.3);
+    --danger-bg: rgba(214,48,49,0.08);
+    --danger-bg-strong: rgba(214,48,49,0.15);
+    --hold-bg: rgba(124,77,255,0.2);
   }
 
   /* ── THEME: HIGH CONTRAST ── */
@@ -55,33 +69,53 @@
     --done: #44ff88; --done-dim: #003318;
     --danger: #ff4444;
     --hold: #cc88ff; --hold-dim: #220044;
+    --todo-border: rgba(68,221,255,0.3);
+    --working-border: rgba(255,204,0,0.3);
+    --done-border: rgba(68,255,136,0.3);
+    --hold-border: rgba(204,136,255,0.3);
+    --danger-bg: rgba(255,68,68,0.08);
+    --danger-bg-strong: rgba(255,68,68,0.15);
+    --hold-bg: rgba(204,136,255,0.2);
   }
 
   /* ── THEME: SOFT DARK ── */
   body.theme-soft-dark {
     --bg: #1a1b20; --surface: #222328; --surface2: #2a2b32;
     --border: #38393f; --border2: #46474f;
-    --text: #dcdee4; --text2: #9496a0; --text3: #5c5e6a;
+    --text: #dcdee4; --text2: #9496a0; --text3: #7d7f8a;
     --accent: #7ca3f0; --accent-dim: #252d40;
     --todo: #5bc0eb; --todo-dim: #1a2e38;
     --working: #e6a64a; --working-dim: #302618;
     --done: #4dd8a0; --done-dim: #142820;
     --danger: #f07070;
     --hold: #b498f0; --hold-dim: #28203a;
+    --todo-border: rgba(91,192,235,0.3);
+    --working-border: rgba(230,166,74,0.3);
+    --done-border: rgba(77,216,160,0.3);
+    --hold-border: rgba(180,152,240,0.3);
+    --danger-bg: rgba(240,112,112,0.08);
+    --danger-bg-strong: rgba(240,112,112,0.15);
+    --hold-bg: rgba(180,152,240,0.2);
   }
 
   /* ── THEME: CYBERPUNK ── */
   body.theme-cyberpunk {
     --bg: #0a0a12; --surface: #0f0f1e; --surface2: #161628;
     --border: #1e1e3a; --border2: #2a2a50;
-    --text: #e0e0ff; --text2: #8888bb; --text3: #555580;
+    --text: #e0e0ff; --text2: #8888bb; --text3: #7878a8;
     --accent: #ff2a6d; --accent-dim: #2a0a18;
     --todo: #05d9e8; --todo-dim: #021e22;
     --working: #ff6e27; --working-dim: #281408;
     --done: #01ffc3; --done-dim: #002a1e;
     --danger: #ff003c;
     --hold: #d300c5; --hold-dim: #200020;
-    --mono: 'IBM Plex Mono', monospace;
+    --todo-border: rgba(5,217,232,0.3);
+    --working-border: rgba(255,110,39,0.3);
+    --done-border: rgba(1,255,195,0.3);
+    --hold-border: rgba(211,0,197,0.3);
+    --danger-bg: rgba(255,0,60,0.08);
+    --danger-bg-strong: rgba(255,0,60,0.15);
+    --hold-bg: rgba(211,0,197,0.2);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,6 +127,20 @@
     font-size: 14px;
     min-height: 100vh;
     padding-bottom: 80px;
+  }
+
+  /* ── SHARED BASE CLASSES ── */
+  .group-label {
+    font-family: var(--mono);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .task-owner {
+    font-family: var(--mono);
+    font-size: 11px;
   }
 
   /* ── BRANDING ── */
@@ -163,12 +211,25 @@
   }
   .save-indicator.saved { color: var(--done); }
   .save-indicator.saving { color: var(--working); }
-  .save-btn { border-color: var(--danger) !important; color: var(--danger) !important; }
-  .save-btn:hover { background: rgba(248,113,113,0.1) !important; }
-  .save-btn.reconnect { border-color: var(--working) !important; color: var(--working) !important; }
-  .save-btn.reconnect:hover { background: var(--working-dim) !important; }
-  .save-btn.linked { border-color: var(--done) !important; color: var(--done) !important; }
-  .save-btn.linked:hover { background: var(--done-dim) !important; }
+  .save-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface2);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+  }
+  .save-btn:hover { background: var(--danger-bg); }
+  .save-btn.reconnect { border-color: var(--working); color: var(--working); }
+  .save-btn.reconnect:hover { background: var(--working-dim); }
+  .save-btn.linked { border-color: var(--done); color: var(--done); }
+  .save-btn.linked:hover { background: var(--done-dim); }
   .unlink-btn {
     display: none;
     align-items: center;
@@ -237,103 +298,14 @@
     cursor: pointer;
     transition: background 0.15s;
   }
-  .empty-trash-btn:hover { background: rgba(248,113,113,0.12); }
+  .empty-trash-btn:hover { background: var(--danger-bg-strong); }
 
-  .trash-group { margin-bottom: 24px; }
-  .trash-group-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text2);
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
 
-  .trash-row {
-    display: grid;
-    grid-template-columns: 1fr 140px 140px 80px;
-    gap: 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 2px;
-    opacity: 0.6;
-    transition: opacity 0.15s;
-    align-items: center;
-  }
-  .trash-row:hover { opacity: 1; }
-
-  .trash-desc {
-    padding: 10px 14px;
-    min-width: 0;
-  }
-  .trash-desc .task-title {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .trash-desc .trash-source-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 500;
-    padding: 2px 6px;
-    border-radius: 3px;
-    margin-left: 6px;
-    background: var(--surface2);
-    color: var(--text3);
-    vertical-align: middle;
-  }
-
-  .trash-owner {
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text2);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .trash-date {
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-  }
-
-  .trash-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 2px;
-    padding: 6px 8px;
-  }
-  .trash-restore-btn {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border: 1px solid var(--done);
-    color: var(--done);
-    background: transparent;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .trash-restore-btn:hover { background: var(--done-dim); }
 
   /* ── READ-ONLY MODE ── */
   .task.readonly { grid-template-columns: 110px 1fr 150px !important; }
   .task.readonly .drag-grip { display: none; }
   .task.readonly .task-status { cursor: default; }
-  .archive-row.readonly { grid-template-columns: 130px 140px 1fr !important; }
-  .onhold-row.readonly { grid-template-columns: 110px 1fr 140px !important; }
   .readonly-badge {
     font-family: var(--mono);
     font-size: 9px;
@@ -407,7 +379,14 @@
   .btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
   .btn.primary { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
   .btn.primary:hover { background: var(--accent); color: #fff; }
-  .btn.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(248,113,113,0.08); }
+  .btn.danger:hover { border-color: var(--danger); color: var(--danger); background: var(--danger-bg); }
+
+  /* ── FOCUS INDICATORS ── */
+  .btn:focus-visible, .save-btn:focus-visible, .tab:focus-visible,
+  .toggle:focus-visible, .seg-btn:focus-visible, .theme-swatch:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   /* ── TABS ── */
   .tabs {
@@ -593,17 +572,17 @@
   }
 
   .task[data-status="TODO"] .task-status { background: var(--todo-dim); }
-  .task[data-status="TODO"] .status-pill { background: var(--todo-dim); color: var(--todo); border: 1px solid rgba(56,189,248,0.3); }
+  .task[data-status="TODO"] .status-pill { background: var(--todo-dim); color: var(--todo); border: 1px solid var(--todo-border); }
 
   .task[data-status="WORKING"] .task-status { background: var(--working-dim); }
-  .task[data-status="WORKING"] .status-pill { background: var(--working-dim); color: var(--working); border: 1px solid rgba(245,158,11,0.3); }
+  .task[data-status="WORKING"] .status-pill { background: var(--working-dim); color: var(--working); border: 1px solid var(--working-border); }
 
   .task[data-status="DONE"] .task-status { background: var(--done-dim); }
-  .task[data-status="DONE"] .status-pill { color: var(--done); border: 1px solid rgba(52,211,153,0.3); background: var(--done-dim); }
+  .task[data-status="DONE"] .status-pill { color: var(--done); border: 1px solid var(--done-border); background: var(--done-dim); }
   .task[data-status="DONE"] .task-desc { opacity: 0.45; text-decoration: line-through; text-decoration-color: var(--text3); }
 
   .task[data-status="ON HOLD"] .task-status { background: var(--hold-dim); }
-  .task[data-status="ON HOLD"] .status-pill { background: var(--hold-dim); color: var(--hold); border: 1px solid rgba(167,139,250,0.3); }
+  .task[data-status="ON HOLD"] .status-pill { background: var(--hold-dim); color: var(--hold); border: 1px solid var(--hold-border); }
   .task[data-status="ON HOLD"] .task-desc { opacity: 0.6; }
 
   .task-desc {
@@ -619,15 +598,7 @@
     display: block;
   }
 
-  .task-note {
-    font-size: 12px;
-    color: var(--text3);
-    display: block;
-    margin-top: 3px;
-    font-style: italic;
-  }
-
-  .task-meta {
+  .task-note, .task-meta {
     font-size: 12px;
     color: var(--text3);
     display: block;
@@ -744,16 +715,14 @@
 
   .task-owner {
     padding: 10px 10px;
-    font-family: var(--mono);
-    font-size: 11px;
     color: var(--text3);
     border-left: 1px solid var(--border);
     text-align: right;
     line-height: 1.6;
   }
 
-  /* ── AGE BADGE ── */
-  .task-age {
+  /* ── BADGE BASE ── */
+  .task-age, .task-due, .cycle-time, .done-early, .done-ontime, .done-late {
     font-family: var(--mono);
     font-size: 9px;
     font-weight: 500;
@@ -762,69 +731,21 @@
     border-radius: 3px;
     white-space: nowrap;
     display: inline-block;
-    margin-left: 8px;
   }
+  .task-age { margin-left: 8px; }
   .age-fresh { color: var(--text3); background: transparent; }
   .age-warn { color: var(--working); background: var(--working-dim); }
-  .age-stale { color: var(--danger); background: rgba(248,113,113,0.08); }
+  .age-stale { color: var(--danger); background: var(--danger-bg); }
 
-  /* ── DUE DATE BADGE ── */
-  .task-due {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 2px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-    display: inline-block;
-    margin-left: 6px;
-  }
+  .task-due { margin-left: 6px; }
   .due-normal { color: var(--text3); background: transparent; }
   .due-soon { color: var(--working); background: var(--working-dim); }
-  .due-overdue { color: var(--danger); background: rgba(248,113,113,0.12); font-weight: 600; }
+  .due-overdue { color: var(--danger); background: var(--danger-bg-strong); font-weight: 600; }
   .due-today { color: var(--accent); background: var(--accent-dim); font-weight: 600; }
 
-  /* ── COMPLETED BADGE TRANSFORMS ── */
-  .cycle-time {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 2px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-    display: inline-block;
-    margin-left: 8px;
-    color: var(--text2);
-    background: transparent;
-  }
-  .done-early, .done-ontime {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 2px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-    display: inline-block;
-    margin-left: 6px;
-    color: var(--done);
-    background: var(--done-dim);
-  }
-  .done-late {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 2px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-    display: inline-block;
-    margin-left: 6px;
-    color: var(--danger);
-    background: rgba(248,113,113,0.08);
-  }
+  .cycle-time { margin-left: 8px; color: var(--text2); background: transparent; }
+  .done-early, .done-ontime { margin-left: 6px; color: var(--done); background: var(--done-dim); }
+  .done-late { margin-left: 6px; font-weight: 600; color: var(--danger); background: var(--danger-bg); }
 
   /* ── DATE VALIDATION FLASH ── */
   .date-invalid-flash {
@@ -832,7 +753,7 @@
   }
   @keyframes dateFlash {
     0%, 100% { border-color: var(--border2); }
-    20%, 60% { border-color: var(--danger); box-shadow: 0 0 0 2px rgba(248,113,113,0.2); }
+    20%, 60% { border-color: var(--danger); box-shadow: 0 0 0 2px var(--danger-bg-strong); }
   }
 
   .task-hold {
@@ -859,89 +780,6 @@
     border-left: 1px solid var(--border);
   }
   .task-del:hover { color: var(--danger); }
-
-  /* ── ON-HOLD VIEW ── */
-  .onhold-group { margin-bottom: 28px; }
-
-  .onhold-project-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .onhold-row {
-    display: grid;
-    grid-template-columns: 110px 1fr 140px 110px;
-    gap: 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-bottom: 2px;
-    align-items: center;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .onhold-row:hover { border-color: var(--border2); box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
-
-  .onhold-status {
-    padding: 12px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid var(--border);
-    background: var(--hold-dim);
-    min-height: 52px;
-  }
-  .onhold-status .status-pill {
-    background: var(--hold-dim);
-    color: var(--hold);
-    border: 1px solid rgba(167,139,250,0.3);
-  }
-
-  .onhold-desc {
-    padding: 12px 16px;
-    line-height: 1.5;
-  }
-
-  .onhold-owner {
-    padding: 10px 10px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-    border-left: 1px solid var(--border);
-    text-align: right;
-    line-height: 1.6;
-  }
-
-  .onhold-actions {
-    padding: 8px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    border-left: 1px solid var(--border);
-  }
-
-  .resume-btn {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 4px 10px;
-    border-radius: 3px;
-    border: 1px solid rgba(167,139,250,0.4);
-    background: var(--hold-dim);
-    color: var(--hold);
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .resume-btn:hover { background: rgba(167,139,250,0.2); border-color: var(--hold); }
 
   /* ── ADD TASK FORM ── */
   .add-task-bar {
@@ -1004,73 +842,6 @@
     transition: border-color 0.15s;
   }
   .add-project-row input:focus { border-color: var(--accent); border-style: solid; }
-
-  /* ── ARCHIVE VIEW ── */
-  .archive-group { margin-bottom: 28px; }
-
-  .archive-month {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .archive-row {
-    display: grid;
-    grid-template-columns: 130px 140px 1fr 36px;
-    gap: 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 2px;
-    opacity: 0.7;
-    transition: opacity 0.15s;
-  }
-  .archive-row:hover { opacity: 1; }
-
-  .archive-date {
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--done);
-    border-right: 1px solid var(--border);
-    display: flex; align-items: center;
-  }
-
-  .archive-owner {
-    padding: 10px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text3);
-    border-right: 1px solid var(--border);
-    display: flex; align-items: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .archive-desc {
-    padding: 10px 16px;
-    font-size: 13px;
-    color: var(--text2);
-    display: flex; align-items: center;
-  }
-
-  .archive-project-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text3);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 2px 7px;
-    margin-left: 10px;
-    white-space: nowrap;
-  }
 
   /* ── EMPTY STATE ── */
   .empty {
@@ -1351,7 +1122,49 @@
   }
 
   /* ── SETTINGS PANEL ── */
-  .settings-modal { width: 520px; }
+  .settings-modal { width: 520px; max-height: 90vh; overflow-y: auto; }
+  .help-modal { width: 580px; max-height: 90vh; overflow-y: auto; }
+  .help-modal h3 { margin-bottom: 20px; }
+  .help-section { margin-bottom: 22px; }
+  .help-section-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .help-section p, .help-section li {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin: 0 0 4px;
+  }
+  .help-section ul { margin: 0; padding-left: 18px; }
+  .help-section li { margin-bottom: 2px; }
+  .help-kbd {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    padding: 1px 6px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .help-shortcut-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    align-items: baseline;
+  }
+  .help-shortcut-grid .help-kbd { justify-self: start; }
+  .help-shortcut-grid span { font-family: var(--sans); font-size: 13px; color: var(--text2); }
+  .help-traffic { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-right: 4px; }
 
   .settings-section { margin-bottom: 20px; }
 
@@ -1631,21 +1444,80 @@
   body.compact .task-note, body.compact .task-meta { margin-top: 1px; }
   body.compact .project-group { margin-bottom: 20px; }
   body.compact .task-list { gap: 1px; }
-  body.compact .onhold-status, body.compact .onhold-desc, body.compact .onhold-owner { padding: 6px 10px; }
-  body.compact .archive-date, body.compact .archive-owner, body.compact .archive-desc { padding: 6px 10px; }
   body.compact .stats-bar { padding: 6px 32px; font-size: 10px; gap: 12px; }
 
   /* ── HIDE NOTES ── */
   body.hide-notes .task-note { display: none; }
 
   /* ── PRINT ── */
+  @page { margin: 18mm 15mm; }
   @media print {
     body { background: white; color: black; }
-    header, .tabs, .header-actions, .task-del, .task-hold, .add-task-bar, .add-project-row, .status-hint, .save-indicator, .save-btn, .unlink-btn, #saveAsBtn, .browser-warning, .resume-btn, .onhold-actions, #newTemplateBtn, #settingsBtn, #settingsModal, .search-bar, .undo-btn, .drag-grip, .project-grip, .project-actions, .collapse-toggle, .collapse-all-row, .trash-actions, .trash-header-row, .add-subtask-bar, .add-subtask-btn, .task-add-sub { display: none !important; }
-    .tabs, .stats-bar, .search-bar { position: static !important; }
-    .task { border: 1px solid #ddd; break-inside: avoid; grid-template-columns: 110px 1fr 150px !important; }
-    main { padding: 0; }
-    .project-group.collapsed .task-list { display: flex !important; }
+    header, .tabs, .header-actions, .task-del, .task-hold, .add-task-bar, .add-project-row, .status-hint, .save-indicator, .save-btn, .unlink-btn, #saveAsBtn, .browser-warning, .resume-btn, .onhold-actions, #newTemplateBtn, #settingsBtn, #settingsModal, #helpModal, .search-bar, .undo-btn, .drag-grip, .project-grip, .project-actions, .collapse-toggle, .collapse-all-row, .trash-actions, .trash-header-row, .add-subtask-bar, .add-subtask-btn, .task-add-sub, .branding-top, .branding-bottom, .toast { display: none !important; }
+    main#main-content { display: none !important; }
+    #print-content { display: block !important; padding: 0; }
+    #print-content .print-section-title {
+      font-family: var(--mono), monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #999;
+      padding-bottom: 4px;
+      margin: 20px 0 10px;
+    }
+    #print-content .print-section-title:first-child { margin-top: 0; }
+    #print-content .print-header {
+      font-family: var(--mono), monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 4px;
+    }
+    #print-content .print-date {
+      font-family: var(--sans), sans-serif;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    .print-project {
+      font-family: var(--mono), monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #555;
+      margin: 12px 0 4px;
+    }
+    .print-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--sans), sans-serif;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    .print-table thead th {
+      text-align: left;
+      font-family: var(--mono), monospace;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+      border-bottom: 1px solid #ccc;
+      padding: 2px 6px 3px;
+    }
+    .print-table td {
+      padding: 3px 6px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+      color: #222;
+    }
+    .print-table .pt-status { width: 70px; font-family: var(--mono), monospace; font-size: 10px; font-weight: 600; }
+    .print-table .pt-desc { }
+    .print-table .pt-owner { width: 90px; font-size: 10px; }
+    .print-table .pt-due { width: 80px; font-size: 10px; white-space: nowrap; }
+    .print-table .pt-subtask td { color: #555; }
+    .print-table .pt-subtask .pt-status { font-size: 9px; font-weight: 400; }
   }
 </style>
 </head>
@@ -1661,16 +1533,16 @@
   </div>
   <div class="header-actions">
     <span id="save-indicator" class="save-indicator"></span>
-    <button class="btn save-btn" id="saveFileBtn" onclick="handleSaveClick()" title="Save file">↓ Save</button>
+    <button class="save-btn" id="saveFileBtn" onclick="handleSaveClick()" title="Save file">↓ Save</button>
     <button class="unlink-btn" id="unlinkBtn" onclick="unlinkFile()" title="Disconnect from file and stop auto-saving">✕</button>
     <button class="btn" id="saveAsBtn" onclick="handleSaveAs()" title="Save a copy to a new file">⤓ Save As</button>
-    <button class="btn" id="snapshotBtn" onclick="exportSnapshot()" title="Export a read-only snapshot">⎘ Snapshot</button>
-    <button class="btn" id="exportMdBtn" onclick="exportMarkdown()" title="Copy agenda as Markdown to clipboard">📋 Export</button>
+    <button class="btn" id="snapshotBtn" onclick="exportSnapshot()" title="Export a read-only snapshot">⎘ Export</button>
     <button class="btn" id="newTemplateBtn" onclick="newTemplate()" title="Create a fresh blank document">✦ New</button>
-    <button class="btn" onclick="window.print()">⎙ Print</button>
-    <button class="undo-btn" id="undoBtn" onclick="undo()" title="Undo last action">↩ Undo</button>
+    <button class="btn" onclick="printAgenda()">⎙ Print</button>
+    <button class="undo-btn" id="undoBtn" onclick="undo()" title="Undo last action (Ctrl+Z)">↩ Undo</button>
+    <button class="undo-btn" id="redoBtn" onclick="redo()" title="Redo last undone action (Ctrl+Y)">↪ Redo</button>
+    <button class="btn" id="helpBtn" onclick="openHelp()" title="Help" style="font-size:16px;line-height:1">?</button>
     <button class="btn" id="settingsBtn" onclick="openSettings()" title="Settings" style="font-size:16px;line-height:1">⚙</button>
-    <button class="btn primary" id="addTaskBtn" onclick="openAddTask()">+ Add Task</button>
   </div>
 </header>
 
@@ -1711,6 +1583,7 @@
 </div>
 
 <main id="main-content"></main>
+<div id="print-content" style="display:none"></div>
 
 <!-- Add/Edit Task Modal -->
 <div class="modal-overlay" id="taskModal">
@@ -1718,7 +1591,7 @@
     <div class="modal-breadcrumb" id="modalBreadcrumb"></div>
     <h3 id="modalTitle">New Task</h3>
     <div class="modal-body">
-      <div class="modal-form">
+      <div>
         <div id="m-project-row">
           <label>Project</label>
           <select id="m-project" onchange="updateModalPreview()"></select>
@@ -1770,6 +1643,14 @@
     <h3>Settings</h3>
 
     <div class="settings-section">
+      <div class="settings-section-title">Title</div>
+      <div class="settings-row">
+        <div class="settings-label">Custom Title<small>Replace "ETASKULATOR" in the header</small></div>
+        <input class="settings-title-input" id="customTitleInput" type="text" placeholder="ETASKULATOR" oninput="setCustomTitle(this.value)">
+      </div>
+    </div>
+
+    <div class="settings-section">
       <div class="settings-section-title">Theme</div>
       <div class="theme-picker" id="themePicker">
         <div class="theme-swatch" data-theme="midnight" onclick="setTheme('midnight')" style="background:#0f1117;color:#5b8cff">
@@ -1817,10 +1698,61 @@
     </div>
 
     <div class="settings-section">
-      <div class="settings-section-title">Meeting</div>
+      <div class="settings-section-title">Archive</div>
       <div class="settings-row">
-        <div class="settings-label">Custom Title<small>Replace "ETASKULATOR" in the header</small></div>
-        <input class="settings-title-input" id="customTitleInput" type="text" placeholder="ETASKULATOR" oninput="setCustomTitle(this.value)">
+        <div class="settings-label">Auto-Purge Interval<small>Archived items older than this are moved to Trash</small></div>
+        <select id="archivePurgeSelect" onchange="setSetting('archivePurge', this.value)" style="font-family:var(--mono);font-size:11px;padding:4px 8px;background:var(--surface2);color:var(--text);border:1px solid var(--border2);border-radius:4px">
+          <option value="never">Never</option>
+          <option value="30">30 days</option>
+          <option value="60">60 days</option>
+          <option value="90">90 days</option>
+          <option value="180">180 days</option>
+          <option value="365">1 year</option>
+        </select>
+      </div>
+      <div class="settings-row">
+        <div class="settings-label">Manual Purge<small>Purge archived items now based on the interval above</small></div>
+        <button class="btn" onclick="manualPurgeArchive()">Purge Archive</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title">Trash</div>
+      <div class="settings-row">
+        <div class="settings-label">Auto-Purge Interval<small>Trash items older than this are permanently deleted</small></div>
+        <select id="trashPurgeSelect" onchange="setSetting('trashPurge', this.value)" style="font-family:var(--mono);font-size:11px;padding:4px 8px;background:var(--surface2);color:var(--text);border:1px solid var(--border2);border-radius:4px">
+          <option value="never">Never</option>
+          <option value="30">30 days</option>
+          <option value="60">60 days</option>
+          <option value="90">90 days</option>
+          <option value="180">180 days</option>
+          <option value="365">1 year</option>
+        </select>
+      </div>
+      <div class="settings-row">
+        <div class="settings-label">Manual Purge<small>Permanently delete trash items now based on the interval above</small></div>
+        <button class="btn" onclick="manualPurgeTrash()">Purge Trash</button>
+      </div>
+      <div class="settings-row">
+        <div class="settings-label">Remove deleted tasks from HTML export<small>When checked, the ⎘ Export snapshot will not include trash items</small></div>
+        <input type="checkbox" id="stripTrashToggle" onchange="setSetting('stripTrashFromExport', this.checked)" style="width:auto;cursor:pointer">
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title">Data</div>
+      <div class="settings-row">
+        <div class="settings-label">Export Backup<small>Download all data as a JSON file</small></div>
+        <button class="btn" onclick="exportJSON()">Export JSON</button>
+      </div>
+      <div class="settings-row">
+        <div class="settings-label">Import Data<small>Load from a .json or .html file</small></div>
+        <button class="btn" onclick="document.getElementById('importFileInput').click()">Import</button>
+        <input type="file" id="importFileInput" accept=".json,.html,.htm" style="display:none" onchange="importData(this)">
+      </div>
+      <div class="settings-row">
+        <div class="settings-label">Copy as Markdown<small>Full text export to clipboard</small></div>
+        <button class="btn" onclick="exportMarkdown()">Copy Markdown</button>
       </div>
     </div>
 
@@ -1831,8 +1763,138 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="renameModal">
+  <div class="modal" style="max-width:400px;padding:24px">
+    <h3 style="margin:0 0 16px">Rename Project</h3>
+    <input id="renameInput" type="text" style="width:100%;padding:8px 10px;font-family:var(--sans);font-size:14px;background:var(--bg);color:var(--text);border:1px solid var(--border2);border-radius:6px;outline:none" onkeydown="if(event.key==='Enter')confirmRename();if(event.key==='Escape')closeRename()">
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+      <button class="btn" onclick="closeRename()">Cancel</button>
+      <button class="btn primary" onclick="confirmRename()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="helpModal" onclick="if(event.target===this)closeHelp()">
+  <div class="modal help-modal">
+    <h3>Help</h3>
+
+    <div class="help-section">
+      <div class="help-section-title">Quick Start</div>
+      <ul>
+        <li>Add a project at the bottom of the Active tab</li>
+        <li>Add tasks via the quick-add bar in each project (type + Enter)</li>
+        <li>Click the status pill to cycle: TODO → WORKING → DONE</li>
+        <li>DONE tasks are automatically archived</li>
+        <li>Click any task to open the full edit modal</li>
+        <li>Pause a task with ⏸ — it moves to On Hold</li>
+        <li>Resume with ▶ to return it to Active</li>
+        <li>Reopen archived tasks with ↩ (returns as WORKING)</li>
+        <li>Delete sends to Trash — restore with ↩ or permanently delete</li>
+      </ul>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Keyboard Shortcuts</div>
+      <div class="help-shortcut-grid">
+        <span class="help-kbd">Ctrl+Z</span> <span>Undo</span>
+        <span class="help-kbd">Ctrl+Y</span> <span>Redo</span>
+        <span class="help-kbd">Ctrl+Shift+Z</span> <span>Redo (alternate)</span>
+        <span class="help-kbd">Ctrl+Enter</span> <span>Save &amp; close modal</span>
+        <span class="help-kbd">Escape</span> <span>Close modal (prompts if unsaved changes)</span>
+        <span class="help-kbd">/</span> <span>Focus search bar</span>
+        <span class="help-kbd">Enter</span> <span>Submit quick-add fields</span>
+      </div>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Save System</div>
+      <ul>
+        <li><span class="help-traffic" style="background:#34d399"></span> <strong>Green</strong> — all changes saved to file</li>
+        <li><span class="help-traffic" style="background:#f59e0b"></span> <strong>Yellow</strong> — save in progress</li>
+        <li><span class="help-traffic" style="background:#f87171"></span> <strong>Red</strong> — unsaved changes</li>
+      </ul>
+      <p>Chrome and Edge auto-save to your file with a 1-second delay. Firefox and Safari require manual downloads. All changes are also backed up to browser storage automatically.</p>
+      <p><strong>Save As</strong> creates a new copy. The <strong>✕</strong> button disconnects auto-save.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Import / Export</div>
+      <ul>
+        <li><strong>JSON Export</strong> (Settings → Data) — full backup as a .json file</li>
+        <li><strong>JSON Import</strong> (Settings → Data) — load from .json or .html files</li>
+        <li><strong>Markdown</strong> (Settings → Data) — copy full task list to clipboard</li>
+        <li><strong>Snapshot</strong> (⎘ Export button) — read-only HTML with frozen date/time</li>
+        <li><strong>New</strong> (✦ button) — blank document, preserves your settings</li>
+      </ul>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Tabs</div>
+      <ul>
+        <li><strong>Active</strong> — TODO and WORKING tasks, fully editable</li>
+        <li><strong>On Hold</strong> — paused tasks with prior status preserved, read-only</li>
+        <li><strong>Archive</strong> — completed tasks, read-only</li>
+        <li><strong>Trash</strong> — deleted items, restorable or permanently deletable</li>
+      </ul>
+      <p>All tabs show identical task detail: status, owner, badges, subtasks, and progress.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Task Features</div>
+      <ul>
+        <li><strong>Subtasks</strong> — expand with ▾, quick-add inline, independent status cycling</li>
+        <li><strong>Progress</strong> — manual slider (0–100%) or auto-calculated from subtasks</li>
+        <li><strong>Drag &amp; drop</strong> — reorder tasks, subtasks, and projects via the grip handle (⠿)</li>
+        <li><strong>Badges</strong> — age (fresh/warn/stale), due date, cycle time, done-vs-due</li>
+        <li><strong>Collapse/Expand</strong> — per project, or use Collapse All / Expand All</li>
+      </ul>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Settings</div>
+      <ul>
+        <li><strong>Themes:</strong> Midnight, Light, High Contrast, Soft Dark, Cyberpunk</li>
+        <li><strong>Font Size:</strong> S / M / L / XL</li>
+        <li><strong>Compact Mode</strong> and <strong>Show Notes Inline</strong> toggles</li>
+        <li><strong>Custom Title</strong> — replaces header text and export filenames</li>
+        <li><strong>Archive Purge</strong> — auto-move old archived items to Trash</li>
+        <li><strong>Trash Purge</strong> — auto-delete old trash items permanently</li>
+        <li><strong>Remove deleted tasks from HTML export</strong> — when checked, the ⎘ Export snapshot will not include trash items</li>
+      </ul>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Print</div>
+      <p>Click ⎙ Print to generate a weekly snapshot with four sections:</p>
+      <ul>
+        <li><strong>Active Tasks</strong> — all current TODO and WORKING tasks</li>
+        <li><strong>On Hold</strong> — all paused tasks</li>
+        <li><strong>Recently Completed</strong> — archived in the last 7 days</li>
+        <li><strong>Recently Deleted</strong> — trashed in the last 7 days</li>
+      </ul>
+      <p>Sections with no items are omitted. Light background, no UI controls.</p>
+    </div>
+
+    <div class="help-section">
+      <div class="help-section-title">Tips</div>
+      <ul>
+        <li>Search (<span class="help-kbd">/</span>) filters by description, notes, owner, and project name</li>
+        <li>Undo/Redo supports up to 10 levels per session</li>
+        <li>All deletes go to Trash first — only permanent delete and empty trash are irreversible</li>
+        <li>Escape prompts before discarding unsaved modal changes</li>
+        <li>Collapse/expand preferences reset on reload (by design)</li>
+        <li>Purge intervals are configurable in Settings under Archive and Trash</li>
+      </ul>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn primary" onclick="closeHelp()">Done</button>
+    </div>
+  </div>
+</div>
+
 <!--DATA_BLOCK_START-->
-<script id="embedded-data" type="application/json">{"projects":[],"tasks":[],"onhold":[],"archive":[],"trash":[],"settings":{"theme":"high-contrast","fontSize":"small","compact":true,"showNotes":true,"title":""}}</script>
+<script id="embedded-data" type="application/json">{"projects":[],"tasks":[],"onhold":[],"archive":[],"trash":[],"settings":{"theme":"midnight","fontSize":"default","compact":false,"showNotes":true,"title":"","archivePurge":"never","trashPurge":"30","stripTrashFromExport":false}}</script>
 <!--DATA_BLOCK_END-->
 
 <div class="toast" id="toast"></div>
@@ -1864,15 +1926,15 @@ let state = {
   trash: [],      // [{id, source, data, deletedAt}]  source: 'active'|'onhold'|'archive'|'project'
 };
 
-let editingTaskId = null;
-let modalStatus = 'TODO';
+let modalState = { taskId: null, subtaskParentId: null, subtaskId: null, status: 'TODO' };
 let currentTab = 'active';
 let searchQuery = '';
 let collapsedProjects = new Set();  // session-only, not persisted
 let expandedSubtasks = new Set();   // session-only — tracks which tasks have subtasks expanded
 let undoStack = [];
+let redoStack = [];
 const MAX_UNDO = 10;
-const APP_VERSION = '1.0';
+const APP_VERSION = '2.0';
 let fileHandle = null;       // File System Access API handle (null until linked)
 let isDirty = false;
 let hasPendingHandle = false; // true when stored handle exists but needs re-grant
@@ -1888,7 +1950,108 @@ const DEFAULT_SETTINGS = {
   compact: false,
   showNotes: true,
   title: '',
+  archivePurge: 'never',
+  trashPurge: '30',
+  stripTrashFromExport: false,
 };
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+
+function today() {
+  return new Date().toISOString().split('T')[0];
+}
+
+let _trashCounter = 0;
+function moveToTrash(source, data) {
+  state.trash.unshift({
+    id: 'x' + Date.now() + '_' + (++_trashCounter),
+    source,
+    data,
+    deletedAt: today(),
+  });
+}
+
+function groupBy(arr, keyFn) {
+  const groups = {};
+  for (const item of arr) {
+    const key = keyFn(item);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(item);
+  }
+  return groups;
+}
+
+function safeFilename() {
+  const name = (state.settings.title && state.settings.title.trim()) || 'etaskulator';
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function renderBadges(createdAt, dueDate, doneAt) {
+  let ageBadge = '', dueBadge = '';
+  if (doneAt) {
+    const ct = cycleTime(createdAt, doneAt);
+    ageBadge = ct ? `<span class="cycle-time" title="Completed in ${ct.replace('\u23F1 ','')}">${ct}</span>` : '';
+    const dvd = doneVsDueLabel(dueDate, doneAt);
+    const dvdc = doneVsDueClass(dueDate, doneAt);
+    dueBadge = dvd ? `<span class="${dvdc}" title="${dvd}">${dvd}</span>` : '';
+  } else {
+    const age = taskAge(createdAt);
+    const ac = ageClass(createdAt);
+    ageBadge = age ? `<span class="task-age ${ac}" title="Created ${createdAt}">${age}</span>` : '';
+    const dl = dueDateLabel(dueDate);
+    const dc = dueDateClass(dueDate);
+    dueBadge = dl ? `<span class="task-due ${dc}" title="Due ${dueDate}">\u{1F4C5} ${dl}</span>` : '';
+  }
+  return { ageBadge, dueBadge };
+}
+
+function populateModal(config) {
+  document.getElementById('modalTitle').textContent = config.title;
+  document.getElementById('m-desc').value = config.desc || '';
+  document.getElementById('m-note').value = config.note || '';
+  document.getElementById('m-owner').value = config.owner || '';
+  document.getElementById('m-due').value = config.dueDate || '';
+  const prog = config.progress || 0;
+  document.getElementById('m-progress').value = prog;
+  document.getElementById('m-progress-label').textContent = prog + '%';
+  document.getElementById('m-progress').disabled = !!config.progressDisabled;
+  document.getElementById('m-status').value = config.status || 'TODO';
+  document.getElementById('m-project-row').style.display = config.hideProject ? 'none' : '';
+  document.getElementById('m-created-override').checked = false;
+  document.getElementById('m-created-field').classList.remove('visible');
+  document.getElementById('m-created-date').value = config.createdAt || '';
+  if (!config.hideProject) populateProjectSelect(config.projectId);
+  document.getElementById('taskModal').classList.add('open');
+  updateModalPreview();
+  // Capture initial form values for dirty check on ESC
+  modalState.initialValues = {
+    desc: document.getElementById('m-desc').value,
+    note: document.getElementById('m-note').value,
+    owner: document.getElementById('m-owner').value,
+    dueDate: document.getElementById('m-due').value,
+    progress: document.getElementById('m-progress').value,
+    status: modalState.status,
+    projectId: document.getElementById('m-project').value,
+  };
+}
+
+function setSetting(key, value) {
+  state.settings[key] = value;
+  applySettings();
+  syncSettingsUI();
+  saveState();
+}
 
 // ─── HANDLE STORAGE (IndexedDB) ───────────────────────────────────────────────
 
@@ -1942,6 +2105,18 @@ async function restoreFileHandle() {
 
 // ─── PERSISTENCE ──────────────────────────────────────────────────────────────
 
+function migrateState() {
+  // Ensure all arrays exist
+  if (!state.onhold) state.onhold = [];
+  if (!state.trash) state.trash = [];
+  if (!state.archive) state.archive = [];
+  if (!state.projects) state.projects = [];
+  if (!state.tasks) state.tasks = [];
+
+  // Field-level settings merge: new settings fields get defaults without replacing existing values
+  state.settings = Object.assign({}, DEFAULT_SETTINGS, state.settings || {});
+}
+
 function loadState() {
   try {
     // Priority 1: embedded data in the HTML file itself
@@ -1950,15 +2125,13 @@ function loadState() {
       const embeddedText = embeddedEl.textContent.trim();
       if (embeddedText && embeddedText !== 'null') {
         state = JSON.parse(embeddedText);
-        if (!state.onhold) state.onhold = []; // backward compat
-        if (!state.trash) state.trash = [];   // backward compat
-        if (!state.settings) state.settings = Object.assign({}, DEFAULT_SETTINGS);
         if (state.readonly) {
           isReadOnly = true;
           snapshotDate = state.snapshotDate || null;
           snapshotTime = state.snapshotTime || null;
           delete state.readonly; delete state.snapshotDate; delete state.snapshotTime;
         }
+        migrateState();
         render();
         return;
       }
@@ -1967,17 +2140,17 @@ function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       state = JSON.parse(saved);
-      if (!state.onhold) state.onhold = []; // backward compat
-      if (!state.trash) state.trash = [];   // backward compat
-      if (!state.settings) state.settings = Object.assign({}, DEFAULT_SETTINGS);
+      migrateState();
       render();
       return;
     }
-    // Priority 3: seed demo data
-    seedDemoData();
+    // Priority 3: empty state
+    state = { projects: [], tasks: [], onhold: [], archive: [], trash: [], settings: Object.assign({}, DEFAULT_SETTINGS) };
+    migrateState();
   } catch (e) {
-    console.error('Load failed, seeding demo data', e);
-    seedDemoData();
+    console.error('Load failed, starting with empty state', e);
+    state = { projects: [], tasks: [], onhold: [], archive: [], trash: [], settings: Object.assign({}, DEFAULT_SETTINGS) };
+    migrateState();
   }
   render();
 }
@@ -1987,18 +2160,20 @@ function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch (e) { /* ignore */ }
-  // Auto-save to file if linked (debounced to reduce disk I/O)
+  // Mark dirty immediately — cleared only after successful writeToFile()
+  isDirty = true;
+  // Auto-save to file if linked (debounced to reduce cloud-sync I/O)
   if (fileHandle) {
     clearTimeout(writeDebounceTimer);
     writeDebounceTimer = setTimeout(() => writeToFile(), 1000);
   } else {
-    isDirty = true;
     updateSaveIndicator();
   }
 }
 
-function buildHtml() {
-  const dataJson = JSON.stringify(state).replace(/<\/script/gi, '<\\/script');
+function buildHtml(snapshotOverrides) {
+  const data = snapshotOverrides ? Object.assign({}, state, snapshotOverrides) : state;
+  const dataJson = JSON.stringify(data).replace(/<\/script/gi, '<\\/script');
   const newDataBlock =
     '<!--DATA_BLOCK_START-->\n' +
     '<script id="embedded-data" type="application/json">' +
@@ -2069,14 +2244,7 @@ async function handleSaveClick() {
 
 function downloadFile() {
   const blob = new Blob([buildHtml()], { type: 'text/html;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = getCurrentFilename();
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  downloadBlob(blob, getCurrentFilename());
   isDirty = false;
   updateSaveIndicator();
 }
@@ -2125,20 +2293,15 @@ async function unlinkFile() {
 
 function buildSnapshotHtml() {
   const now = new Date();
-  const snap = Object.assign({}, state, {
+  const overrides = {
     readonly: true,
     snapshotDate: now.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric', year:'numeric'}),
     snapshotTime: now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'}),
-  });
-  const dataJson = JSON.stringify(snap).replace(/<\/script/gi, '<\\/script');
-  const newDataBlock =
-    '<!--DATA_BLOCK_START-->\n' +
-    '<script id="embedded-data" type="application/json">' +
-    dataJson +
-    '<\/script>\n' +
-    '<!--DATA_BLOCK_END-->';
-  const pattern = /<!--DATA_BLOCK_START-->[\s\S]*?<!--DATA_BLOCK_END-->/;
-  return ORIGINAL_HTML.replace(pattern, newDataBlock);
+  };
+  if (state.settings.stripTrashFromExport) {
+    overrides.trash = [];
+  }
+  return buildHtml(overrides);
 }
 
 function snapshotFilename() {
@@ -2148,6 +2311,107 @@ function snapshotFilename() {
   const day = String(d.getDate()).padStart(2, '0');
   const base = getCurrentFilename().replace(/\.html?$/i, '');
   return `${base}_${y}${m}${day}.html`;
+}
+
+function printAgenda() {
+  const container = document.getElementById('print-content');
+  const titleText = (state.settings.title || '').trim() || 'ETASKULATOR';
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  let html = `<div class="print-header">${esc(titleText)} SUMMARY</div>`;
+  html += `<div class="print-date">${dateStr}</div>`;
+
+  // Section 1: Active Tasks
+  if (state.tasks.length > 0) {
+    html += `<div class="print-section-title">Active Tasks</div>`;
+    const grouped = groupBy(state.tasks, t => {
+      const proj = state.projects.find(p => p.id === t.projectId);
+      return proj ? proj.name : 'Unknown Project';
+    });
+    for (const [name, tasks] of Object.entries(grouped)) {
+      html += renderPrintTable(name, tasks);
+    }
+  }
+
+  // Section 2: On Hold
+  if (state.onhold.length > 0) {
+    html += `<div class="print-section-title">On Hold</div>`;
+    const grouped = groupBy(state.onhold, t => t.projectName || 'Unknown Project');
+    for (const [name, items] of Object.entries(grouped)) {
+      const display = items.map(item => Object.assign({}, item, { status: item.priorStatus || 'TODO' }));
+      html += renderPrintTable(name, display);
+    }
+  }
+
+  // Section 3: Recently Completed (last 7 days)
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString().split('T')[0];
+  const recentArchive = state.archive.filter(a => a.doneAt && a.doneAt >= sevenDaysAgo);
+  if (recentArchive.length > 0) {
+    html += `<div class="print-section-title">Recently Completed (Last 7 Days)</div>`;
+    const sorted = [...recentArchive].sort((a, b) => (b.doneAt || '').localeCompare(a.doneAt || ''));
+    const grouped = groupBy(sorted, a => a.projectName || 'Unknown Project');
+    for (const [name, items] of Object.entries(grouped)) {
+      html += renderPrintTable(name, items);
+    }
+  }
+
+  // Section 4: Recently Deleted (last 7 days)
+  const recentTrash = state.trash.filter(t => t.deletedAt && t.deletedAt >= sevenDaysAgo);
+  if (recentTrash.length > 0) {
+    html += `<div class="print-section-title">Recently Deleted (Last 7 Days)</div>`;
+    const sorted = [...recentTrash].sort((a, b) => b.deletedAt.localeCompare(a.deletedAt));
+    const taskLikes = sorted.map(item =>
+      Object.assign({}, item.data, { _trashId: item.id, status: item.data.status || 'TODO', projectName: item.data.projectName || 'Unknown Project' })
+    );
+    const grouped = groupBy(taskLikes, t => t.projectName || 'Unknown Project');
+    for (const [name, items] of Object.entries(grouped)) {
+      html += renderPrintTable(name, items);
+    }
+  }
+
+  container.innerHTML = html;
+  window.print();
+  container.innerHTML = '';
+}
+
+function printDateShort(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function renderPrintTable(projectName, items) {
+  let html = `<div class="print-project">${esc(projectName)} (${items.length})</div>`;
+  html += `<table class="print-table"><thead><tr>
+    <th class="pt-status">Status</th>
+    <th class="pt-desc">Description</th>
+    <th class="pt-owner">Owner</th>
+    <th class="pt-due">Due</th>
+  </tr></thead><tbody>`;
+  for (const item of items) {
+    html += renderPrintRow(item, false);
+    const subs = item.subtasks || [];
+    for (const sub of subs) {
+      html += renderPrintRow(sub, true);
+    }
+  }
+  html += `</tbody></table>`;
+  return html;
+}
+
+function renderPrintRow(item, isSubtask) {
+  const cls = isSubtask ? ' class="pt-subtask"' : '';
+  const prefix = isSubtask ? '&nbsp;&nbsp;&bull; ' : '';
+  const due = item.dueDate ? printDateShort(item.dueDate) : '';
+  const done = item.doneAt ? printDateShort(item.doneAt) : '';
+  const dateCol = done ? '&#10003; ' + done : due;
+  return `<tr${cls}>
+    <td class="pt-status">${item.status}</td>
+    <td class="pt-desc">${prefix}${esc(item.desc)}</td>
+    <td class="pt-owner">${esc(item.owner || '')}</td>
+    <td class="pt-due">${dateCol}</td>
+  </tr>`;
 }
 
 async function exportSnapshot() {
@@ -2169,23 +2433,47 @@ async function exportSnapshot() {
     }
   } else {
     const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = snapshotFilename();
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    downloadBlob(blob, snapshotFilename());
   }
 }
 
 function buildMarkdown() {
-  const title = (state.settings && state.settings.title) || 'ETASKULATOR';
+  const title = (state.settings.title && state.settings.title.trim()) || 'ETASKULATOR';
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
   let md = `# ${title} v${APP_VERSION}\n`;
   md += `**${dateStr}**\n\n`;
+
+  function taskFields(t, pfx) {
+    let out = '';
+    if (t.status) out += `${pfx}  - Status: ${t.status}\n`;
+    if (t.owner) out += `${pfx}  - Owner: ${t.owner}\n`;
+    if (t.createdAt) out += `${pfx}  - Created: ${t.createdAt}\n`;
+    if (t.dueDate) out += `${pfx}  - Due: ${t.dueDate}\n`;
+    if (t.doneAt) out += `${pfx}  - Done: ${t.doneAt}\n`;
+    if (t.heldAt) out += `${pfx}  - Held: ${t.heldAt}\n`;
+    if (t.priorStatus) out += `${pfx}  - Prior Status: ${t.priorStatus}\n`;
+    const prog = t.subtasks && t.subtasks.length > 0 ? getEffectiveProgress(t) : (t.progress || 0);
+    if (prog > 0) out += `${pfx}  - Progress: ${prog}%\n`;
+    if (t.note) out += `${pfx}  - Note: ${t.note}\n`;
+    return out;
+  }
+
+  function renderTasks(tasks, pfx) {
+    let out = '';
+    for (const t of tasks) {
+      out += `${pfx}- **${t.desc}**\n`;
+      out += taskFields(t, pfx);
+      if (t.subtasks && t.subtasks.length > 0) {
+        out += `${pfx}  - Subtasks:\n`;
+        for (const s of t.subtasks) {
+          out += `${pfx}    - **${s.desc}**\n`;
+          out += taskFields(s, pfx + '    ');
+        }
+      }
+    }
+    return out;
+  }
 
   // Active tasks grouped by project
   if (state.projects.length > 0) {
@@ -2194,48 +2482,54 @@ function buildMarkdown() {
       const tasks = state.tasks.filter(t => t.projectId === proj.id);
       if (tasks.length === 0) continue;
       if (!hasActive) { md += `## Active Tasks\n\n`; hasActive = true; }
-      md += `### ${proj.name}\n\n`;
-      for (const t of tasks) {
-        const check = t.status === 'DONE' ? 'x' : ' ';
-        const status = t.status === 'WORKING' ? ' 🔶' : '';
-        const owner = t.owner ? ` — *${t.owner}*` : '';
-        const due = t.dueDate ? ` (due ${t.dueDate})` : '';
-        const effProg = getEffectiveProgress(t);
-        const prog = effProg > 0 ? ` [${effProg}%]` : '';
-        md += `- [${check}] ${t.desc}${status}${owner}${due}${prog}\n`;
-        if (t.note) md += `  > ${t.note}\n`;
-        if (t.subtasks && t.subtasks.length > 0) {
-          for (const s of t.subtasks) {
-            const sCheck = s.status === 'DONE' ? 'x' : ' ';
-            const sStatus = s.status === 'WORKING' ? ' 🔶' : '';
-            const sOwner = s.owner ? ` — *${s.owner}*` : '';
-            const sDue = s.dueDate ? ` (due ${s.dueDate})` : '';
-            const sProg = (s.progress || 0) > 0 ? ` [${s.progress}%]` : '';
-            md += `  - [${sCheck}] ${s.desc}${sStatus}${sOwner}${sDue}${sProg}\n`;
-            if (s.note) md += `    > ${s.note}\n`;
-          }
-        }
-      }
+      md += `- **${proj.name}**\n`;
+      md += renderTasks(tasks, '    ');
       md += `\n`;
     }
   }
 
   // On Hold tasks
   if (state.onhold.length > 0) {
-    md += `## On Hold\n\n`;
-    const groups = {};
-    for (const h of state.onhold) {
-      const pn = h.projectName || 'Unknown Project';
-      if (!groups[pn]) groups[pn] = [];
-      groups[pn].push(h);
-    }
+    md += `---\n\n## On Hold\n\n`;
+    const groups = groupBy(state.onhold, h => h.projectName || 'Unknown Project');
     for (const [projName, items] of Object.entries(groups)) {
-      md += `### ${projName}\n\n`;
-      for (const h of items) {
-        const owner = h.owner ? ` — *${h.owner}*` : '';
-        const due = h.dueDate ? ` (due ${h.dueDate})` : '';
-        md += `- ⏸ ${h.desc}${owner}${due}\n`;
-        if (h.note) md += `  > ${h.note}\n`;
+      md += `- **${projName}**\n`;
+      md += renderTasks(items, '    ');
+      md += `\n`;
+    }
+  }
+
+  // Archive
+  if (state.archive.length > 0) {
+    md += `---\n\n## Completed\n\n`;
+    const groups = groupBy(state.archive, a => a.projectName || 'Unknown Project');
+    for (const [projName, items] of Object.entries(groups)) {
+      md += `- **${projName}**\n`;
+      md += renderTasks(items, '    ');
+      md += `\n`;
+    }
+  }
+
+  // Trash
+  if (state.trash.length > 0) {
+    md += `---\n\n## Deleted\n\n`;
+    for (const x of state.trash) {
+      const d = x.data || {};
+      const name = d.desc || d.name || 'Unknown';
+      md += `- **${name}**\n`;
+      md += `    - Source: ${x.source}\n`;
+      md += `    - Deleted: ${x.deletedAt}\n`;
+      if (d.status) md += `    - Status: ${d.status}\n`;
+      if (d.owner) md += `    - Owner: ${d.owner}\n`;
+      if (d.createdAt) md += `    - Created: ${d.createdAt}\n`;
+      if (d.dueDate) md += `    - Due: ${d.dueDate}\n`;
+      if (d.note) md += `    - Note: ${d.note}\n`;
+      if (d.subtasks && d.subtasks.length > 0) {
+        md += `    - Subtasks:\n`;
+        for (const s of d.subtasks) {
+          md += `        - **${s.desc}**\n`;
+          md += taskFields(s, '        ');
+        }
       }
       md += `\n`;
     }
@@ -2245,9 +2539,10 @@ function buildMarkdown() {
   const todoCount = state.tasks.filter(t => t.status === 'TODO').length;
   const workingCount = state.tasks.filter(t => t.status === 'WORKING').length;
   const holdCount = state.onhold.length;
-  const doneCount = state.archive.length;
-  md += `---\n`;
-  md += `**Stats:** ${todoCount} TODO · ${workingCount} WORKING · ${holdCount} ON HOLD · ${doneCount} DONE · ${todoCount + workingCount + holdCount + doneCount} TOTAL\n`;
+  const archiveCount = state.archive.length;
+  const trashCount = state.trash.length;
+  md += `---\n\n`;
+  md += `**Stats:** ${todoCount} TODO · ${workingCount} WORKING · ${holdCount} ON HOLD · ${archiveCount} ARCHIVED · ${trashCount} TRASH · ${todoCount + workingCount + holdCount + archiveCount + trashCount} TOTAL\n`;
 
   return md;
 }
@@ -2260,16 +2555,53 @@ async function exportMarkdown() {
   } catch (e) {
     // Fallback: download as .md file
     const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = getCurrentFilename().replace(/\.html?$/i, '') + '.md';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    downloadBlob(blob, safeFilename() + '.md');
     showToast('Downloaded as Markdown file');
   }
+}
+
+function exportJSON() {
+  const d = today().replace(/-/g, '');
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json;charset=utf-8' });
+  downloadBlob(blob, `${safeFilename()}_backup_${d}.json`);
+  showToast('Backup exported');
+}
+
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = '';
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      let parsed;
+      const text = e.target.result;
+      if (file.name.match(/\.json$/i)) {
+        parsed = JSON.parse(text);
+      } else {
+        // HTML file — extract JSON from data block sentinels
+        const match = text.match(/<!--DATA_BLOCK_START-->\s*<script[^>]*>([\s\S]*?)<\/script>\s*<!--DATA_BLOCK_END-->/);
+        if (!match) { alert('No data found in this HTML file.'); return; }
+        parsed = JSON.parse(match[1]);
+      }
+      // Validate shape — must have at least projects and tasks arrays
+      if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.projects) || !Array.isArray(parsed.tasks)) {
+        alert('Invalid data format. File must contain projects and tasks.');
+        return;
+      }
+      if (!confirm('This will replace all current data. Continue?')) return;
+      pushUndo();
+      state = parsed;
+      migrateState();
+      saveState();
+      render();
+      closeSettings();
+      showToast('Data imported');
+    } catch (err) {
+      alert('Could not read file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
 }
 
 function showToast(message) {
@@ -2328,52 +2660,27 @@ function updateSaveButton() {
   const unlinkBtn = document.getElementById('unlinkBtn');
   if (fileHandle) {
     btn.textContent = '\u2713 Auto-Save';
-    btn.className = 'btn save-btn linked';
+    btn.className = 'save-btn linked';
     btn.title = 'Auto-save is active';
     if (unlinkBtn) unlinkBtn.style.display = 'inline-flex';
   } else if (hasPendingHandle) {
     btn.textContent = '\u27F3 Reconnect';
-    btn.className = 'btn save-btn reconnect';
+    btn.className = 'save-btn reconnect';
     btn.title = 'Click to reconnect to your file';
     if (unlinkBtn) unlinkBtn.style.display = 'none';
   } else {
     btn.textContent = '\u2193 Save';
-    btn.className = 'btn save-btn';
+    btn.className = 'save-btn';
     btn.title = 'Save file';
     if (unlinkBtn) unlinkBtn.style.display = 'none';
   }
-}
-
-function seedDemoData() {
-  state = {
-    projects: [
-      { id: 'p1', name: 'Auth / Security' },
-      { id: 'p2', name: 'Performance' },
-      { id: 'p3', name: 'Infrastructure' },
-    ],
-    tasks: [
-      { id: 't1', projectId: 'p1', desc: 'Migrate auth service to OAuth 2.0', note: 'PR #88 open — token refresh done, session handling in progress', owner: 'A. Patel', status: 'WORKING', createdAt: '2026-01-28', dueDate: '2026-02-20' },
-      { id: 't2', projectId: 'p1', desc: 'Write unit tests for payment module', note: 'Blocked on SDK update — ETA Thursday', owner: 'A. Patel', status: 'TODO', createdAt: '2026-02-10', dueDate: '2026-02-27' },
-      { id: 't3', projectId: 'p2', desc: 'Optimize slow query on reports dashboard', note: 'Index added — load time down 40%, still profiling edge cases', owner: 'T. Brooks', status: 'WORKING', createdAt: '2026-02-20', dueDate: '2026-03-05' },
-      { id: 't4', projectId: 'p2', desc: 'Implement rate limiting on public API endpoints', note: 'Will start after OAuth merge', owner: 'M. Chen', status: 'TODO', createdAt: '2026-02-25', dueDate: '' },
-      { id: 't5', projectId: 'p3', desc: 'Set up staging environment for new microservice', note: 'Docker compose drafted, needs DevOps sign-off', owner: 'S. Rivera', status: 'TODO', createdAt: '2026-02-03' },
-    ],
-    onhold: [],
-    trash: [],
-    settings: Object.assign({}, DEFAULT_SETTINGS),
-    archive: [
-      { id: 'a1', projectId: 'p1', projectName: 'Auth / Security', desc: 'Resolve CORS errors on /api/v2/users', note: 'Missing header in middleware', owner: 'M. Chen', doneAt: '2025-02-18' },
-      { id: 'a2', projectId: 'p3', projectName: 'Infrastructure', desc: 'Audit and rotate all expiring SSL certificates', note: 'Four certs renewed', owner: 'S. Rivera', doneAt: '2025-02-14' },
-      { id: 'a3', projectId: 'p3', projectName: 'Infrastructure', desc: 'Upgrade Node.js runtime to v20 LTS', note: 'Deployed Friday, no prod issues', owner: 'T. Brooks', doneAt: '2025-02-21' },
-    ]
-  };
 }
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
 
 function render() {
   updateBadges();
-  updateUndoBtn();
+  updateUndoRedoBtns();
   if (currentTab === 'active') renderActive();
   else if (currentTab === 'onhold') renderOnHold();
   else if (currentTab === 'trash') renderTrash();
@@ -2452,7 +2759,7 @@ function renderActive() {
     if (!isReadOnly) {
       html += `
         <div class="add-task-bar">
-          <select onchange="" style="font-size:11px">
+          <select style="font-size:11px">
             <option value="TODO">TODO</option>
             <option value="WORKING">WORKING</option>
           </select>
@@ -2486,26 +2793,12 @@ function renderActive() {
   main.innerHTML = html;
 }
 
-function renderTask(task, isSubtask) {
-  let ageBadge, dueBadge;
-  if (isSubtask && task.status === 'DONE' && task.doneAt) {
-    const ct = cycleTime(task.createdAt, task.doneAt);
-    ageBadge = ct ? `<span class="cycle-time" title="Completed in ${ct.replace('\u23F1 ','')}">${ct}</span>` : '';
-    const dvd = doneVsDueLabel(task.dueDate, task.doneAt);
-    const dvdc = doneVsDueClass(task.dueDate, task.doneAt);
-    dueBadge = dvd ? `<span class="${dvdc}" title="${dvd}">${dvd}</span>` : '';
-  } else {
-    const age = taskAge(task.createdAt);
-    const ac = ageClass(task.createdAt);
-    ageBadge = age ? `<span class="task-age ${ac}" title="Created ${task.createdAt}">${age}</span>` : '';
-    const dl = dueDateLabel(task.dueDate);
-    const dc = dueDateClass(task.dueDate);
-    dueBadge = dl ? `<span class="task-due ${dc}" title="Due ${task.dueDate}">📅 ${dl}</span>` : '';
-  }
-  const effectiveProgress = getEffectiveProgress(task);
-  const progressBar = renderProgressBar(effectiveProgress);
+function renderTaskRow(task, isSubtask, mode) {
+  mode = mode || 'active';
+  const doneAt = (isSubtask && task.status === 'DONE' && task.doneAt) ? task.doneAt : null;
+  const { ageBadge, dueBadge } = renderBadges(task.createdAt, task.dueDate, doneAt);
+  const progressBar = renderProgressBar(getEffectiveProgress(task));
 
-  // Subtask badge + toggle (only for parent tasks)
   const subs = task.subtasks || [];
   const hasSubs = subs.length > 0;
   const doneCount = hasSubs ? subs.filter(s => s.status === 'DONE').length : 0;
@@ -2514,8 +2807,9 @@ function renderTask(task, isSubtask) {
     ? `<span class="subtask-toggle${doneCount === subs.length ? ' all-done' : ''}" onclick="event.stopPropagation();toggleSubtaskExpand('${task.id}')" title="Click to ${isExpanded ? 'collapse' : 'expand'} subtasks">${isExpanded ? '▾' : '▸'} ${doneCount}/${subs.length} subtasks</span>`
     : '';
 
+  // Read-only snapshot: no actions at all
   if (isReadOnly) {
-    let html = `
+    return `
       <div class="task readonly" data-status="${task.status}" data-id="${task.id}">
         <div class="task-status">
           <span class="status-pill">${task.status}</span>
@@ -2529,170 +2823,191 @@ function renderTask(task, isSubtask) {
         <div class="task-owner">${esc(task.owner || '—')}${ageBadge}${dueBadge}</div>
       </div>
     `;
-    if (!isSubtask && hasSubs && isExpanded) {
-      html += `<div class="subtask-container">`;
-      for (const sub of subs) html += renderTask(sub, true);
-      html += `</div>`;
-    }
-    return html;
   }
 
-  const editFn = isSubtask ? `editSubtask('${task.parentId}','${task.id}')` : `editTask('${task.id}')`;
-  const statusFn = isSubtask ? `cycleSubtaskStatus('${task.parentId}','${task.id}')` : `cycleStatus('${task.id}')`;
-  const holdBtn = isSubtask ? '<div></div>' : `<div class="task-hold" onclick="holdTask('${task.id}')" title="Put on hold">⏸</div>`;
-  const delFn = isSubtask ? `deleteSubtask('${task.parentId}','${task.id}')` : `deleteTask('${task.id}')`;
+  // All modes output exactly 7 grid children to match the CSS grid-template-columns:
+  // [grip] [status] [desc] [owner] [action1] [action2] [action3]
+  let gripHtml, statusClick, descClick, rowClick, col5, col6, col7;
+  const dragAttr = (mode === 'active') ? 'draggable="true"' : '';
 
-  const addSubBtn = isSubtask ? '<div></div>' : `<div class="task-add-sub" onclick="event.stopPropagation();toggleSubtaskExpand('${task.id}')" title="Add subtask">+</div>`;
+  if (mode === 'active') {
+    gripHtml = `<div class="drag-grip" ${isSubtask ? 'title="Drag to reorder subtask"' : 'title="Drag to reorder"'}>⠿</div>`;
+    const editFn = isSubtask ? `editSubtask('${task.parentId}','${task.id}')` : `editTask('${task.id}')`;
+    const statusFn = isSubtask ? `cycleSubtaskStatus('${task.parentId}','${task.id}')` : `cycleStatus('${task.id}')`;
+    statusClick = `onclick="${statusFn}" title="Click to advance status"`;
+    descClick = `onclick="${editFn}" style="cursor:pointer" title="Click to edit"`;
+    rowClick = '';
+    col5 = isSubtask ? '<div></div>' : `<div class="task-hold" onclick="holdTask('${task.id}')" title="Put on hold">⏸</div>`;
+    const delFn = isSubtask ? `deleteSubtask('${task.parentId}','${task.id}')` : `deleteTask('${task.id}')`;
+    col6 = `<div class="task-del" onclick="${delFn}" title="Remove ${isSubtask ? 'subtask' : 'task'}">✕</div>`;
+    col7 = isSubtask ? '<div></div>' : `<div class="task-add-sub" onclick="event.stopPropagation();toggleSubtaskExpand('${task.id}')" title="Add subtask">+</div>`;
+  } else {
+    gripHtml = '<div></div>';
+    statusClick = '';
+    descClick = '';
+    let modalFinder;
+    if (isSubtask) {
+      // Subtasks on read-only tabs: open the parent task's modal with subtask breadcrumb
+      const parentDescEsc = (task._parentDesc || '').replace(/'/g, "\\'");
+      if (mode === 'onhold') modalFinder = `state.onhold.find(h=>h.id==='${task.parentId}'),'${mode}','${parentDescEsc}'`;
+      else if (mode === 'archive') modalFinder = `state.archive.find(a=>a.id==='${task.parentId}'),'${mode}','${parentDescEsc}'`;
+      else if (mode === 'trash') modalFinder = `state.trash.find(t=>t.id==='${task._trashId}'),'${mode}','${parentDescEsc}'`;
+      col5 = '<div></div>';
+      col6 = '<div></div>';
+    } else if (mode === 'onhold') {
+      modalFinder = `state.onhold.find(h=>h.id==='${task.id}')`;
+      col5 = `<div class="task-hold" onclick="event.stopPropagation();returnToActive('${task.id}')" title="Resume — return to active tasks">▶</div>`;
+      col6 = `<div class="task-del" onclick="event.stopPropagation();deleteHeldTask('${task.id}')" title="Delete task">✕</div>`;
+    } else if (mode === 'archive') {
+      modalFinder = `state.archive.find(a=>a.id==='${task.id}')`;
+      col5 = `<div class="task-hold" onclick="event.stopPropagation();returnArchiveToActive('${task.id}')" title="Reopen — return to active tasks">↩</div>`;
+      col6 = `<div class="task-del" onclick="event.stopPropagation();deleteArchiveItem('${task.id}')" title="Delete">✕</div>`;
+    } else if (mode === 'trash') {
+      modalFinder = `state.trash.find(t=>t.id==='${task._trashId}')`;
+      col5 = `<div class="task-hold" onclick="event.stopPropagation();restoreFromTrash('${task._trashId}')" title="Restore to original location">↩</div>`;
+      col6 = `<div class="task-del" onclick="event.stopPropagation();permanentDeleteTrash('${task._trashId}')" title="Permanently delete">✕</div>`;
+    }
+    if (isSubtask && modalFinder) {
+      // Subtask modalFinder already includes mode and parentDesc params
+      rowClick = `onclick="openViewModal(${modalFinder})" style="cursor:pointer"`;
+    } else {
+      rowClick = modalFinder ? `onclick="openViewModal(${modalFinder},'${mode}')" style="cursor:pointer"` : '';
+    }
+    col7 = '<div></div>';
+  }
 
-  let html = `
-    <div class="task" data-status="${task.status}" data-id="${task.id}" ${isSubtask ? `draggable="true" data-parent-id="${task.parentId}"` : 'draggable="true"'}>
-      <div class="drag-grip" ${isSubtask ? 'title="Drag to reorder subtask"' : 'title="Drag to reorder"'}>⠿</div>
-      <div class="task-status" onclick="${statusFn}" title="Click to advance status">
+  return `
+    <div class="task" data-status="${task.status}" data-id="${task.id}" ${dragAttr} ${isSubtask ? `data-parent-id="${task.parentId}"` : ''} ${rowClick}>
+      ${gripHtml}
+      <div class="task-status" ${statusClick}>
         <span class="status-pill">${task.status}</span>
       </div>
-      <div class="task-desc" onclick="${editFn}" style="cursor:pointer" title="Click to edit">
+      <div class="task-desc" ${descClick}>
         <span class="task-title">${esc(task.desc)}</span>
         ${task.note ? `<span class="task-note">${esc(task.note)}</span>` : ''}
         ${subtaskToggle}
         ${progressBar}
       </div>
       <div class="task-owner">${esc(task.owner || '—')}${ageBadge}${dueBadge}</div>
-      ${holdBtn}
-      <div class="task-del" onclick="${delFn}" title="Remove ${isSubtask ? 'subtask' : 'task'}">✕</div>
-      ${addSubBtn}
+      ${col5}
+      ${col6}
+      ${col7}
     </div>
   `;
+}
 
-  // Render subtask rows if expanded
-  if (!isSubtask && hasSubs && isExpanded) {
-    html += `<div class="subtask-container">`;
-    for (const sub of subs) {
-      html += renderTask(Object.assign({}, sub, { parentId: task.id }), true);
-    }
-    // Quick-add subtask bar
+function renderSubtaskContainer(taskId, subs, mode, parentTrashId, parentDesc) {
+  let html = '<div class="subtask-container">';
+  for (const sub of subs) {
+    const subData = Object.assign({}, sub, { parentId: taskId, _parentDesc: parentDesc || '' });
+    if (parentTrashId) subData._trashId = parentTrashId;
+    html += renderTask(subData, true, mode);
+  }
+  // Quick-add bar only on active tab
+  if (mode === 'active') {
     html += `
       <div class="add-subtask-bar">
         <input class="desc-input" type="text" placeholder="Add subtask…"
-          onkeydown="if(event.key==='Enter') quickAddSubtask('${task.id}', this)">
+          onkeydown="if(event.key==='Enter') quickAddSubtask('${taskId}', this)">
         <input class="owner-input" type="text" placeholder="Owner"
-          onkeydown="if(event.key==='Enter') quickAddSubtask('${task.id}', this.previousElementSibling)">
-        <button class="add-subtask-btn" onclick="quickAddSubtaskFromRow('${task.id}', this)">+</button>
+          onkeydown="if(event.key==='Enter') quickAddSubtask('${taskId}', this.previousElementSibling)">
+        <button class="add-subtask-btn" onclick="quickAddSubtaskFromRow('${taskId}', this)">+</button>
       </div>`;
-    html += `</div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderTask(task, isSubtask, mode) {
+  mode = mode || 'active';
+  let html = renderTaskRow(task, isSubtask, mode);
+
+  const subs = task.subtasks || [];
+  const hasSubs = subs.length > 0;
+  const isExpanded = expandedSubtasks.has(task.id);
+
+  // Render subtask rows if expanded
+  if (!isSubtask && hasSubs && isExpanded) {
+    if (isReadOnly) {
+      html += '<div class="subtask-container">';
+      for (const sub of subs) html += renderTask(sub, true, mode);
+      html += '</div>';
+    } else {
+      html += renderSubtaskContainer(task.id, subs, mode, task._trashId, task.desc);
+    }
   }
 
-  // Show quick-add bar for tasks with no subtasks when the inline + is clicked
-  if (!isSubtask && !hasSubs && !isReadOnly && expandedSubtasks.has(task.id)) {
-    html += `
-      <div class="subtask-container">
-        <div class="add-subtask-bar">
-          <input class="desc-input" type="text" placeholder="Add subtask…"
-            onkeydown="if(event.key==='Enter') quickAddSubtask('${task.id}', this)">
-          <input class="owner-input" type="text" placeholder="Owner"
-            onkeydown="if(event.key==='Enter') quickAddSubtask('${task.id}', this.previousElementSibling)">
-          <button class="add-subtask-btn" onclick="quickAddSubtaskFromRow('${task.id}', this)">+</button>
-        </div>
-      </div>`;
+  // Show quick-add bar for tasks with no subtasks when the inline + is clicked (active only)
+  if (!isSubtask && !hasSubs && !isReadOnly && isExpanded && mode === 'active') {
+    html += renderSubtaskContainer(task.id, [], mode, task._trashId, task.desc);
   }
 
   return html;
 }
 
+function renderProjectGroups(items, mode, groupKeyFn) {
+  const groups = groupBy(items, groupKeyFn);
+  const groupKeys = Object.keys(groups);
+  let html = '';
+
+  // Collapse All / Expand All button (when 2+ groups)
+  if (groupKeys.length > 1) {
+    const allCollapsed = groupKeys.every(k => collapsedProjects.has(k));
+    html += `<div class="collapse-all-row"><button class="collapse-all-btn" onclick="toggleCollapseAll()">${allCollapsed ? '▾ Expand All' : '▸ Collapse All'}</button></div>`;
+  }
+  html += `<div style="height:8px"></div>`;
+
+  for (const [groupName, groupItems] of Object.entries(groups)) {
+    const groupId = groupName.replace(/\W/g, '_');
+    const isCollapsed = collapsedProjects.has(groupId);
+    html += `
+      <div class="project-group${isCollapsed ? ' collapsed' : ''}" data-project-id="${groupId}">
+        <div class="project-header">
+          <span class="collapse-toggle${isCollapsed ? ' collapsed' : ''}" onclick="toggleCollapse('${groupId}')" title="${isCollapsed ? 'Expand' : 'Collapse'}">▾</span>
+          <span class="project-name" onclick="toggleCollapse('${groupId}')" style="cursor:pointer">${esc(groupName)} <span style="font-weight:400;opacity:0.5">(${groupItems.length})</span></span>
+          <div class="project-line"></div>
+        </div>
+        <div class="task-list">
+    `;
+    for (const item of groupItems) {
+      html += renderTask(item, false, mode);
+    }
+    html += `
+        </div>
+      </div>`;
+  }
+  return html;
+}
+
 function renderArchive() {
   const main = document.getElementById('main-content');
-  const filtered = [...state.archive].filter(matchesSearch);
   if (state.archive.length === 0) {
     main.innerHTML = `<div class="empty">No archived items yet.<br>Completed tasks will appear here.</div>`;
     return;
   }
+  const filtered = [...state.archive].filter(matchesSearch);
   if (searchQuery && filtered.length === 0) {
     main.innerHTML = `<div class="search-no-results">No archived tasks matching "${esc(searchQuery)}"</div>`;
     return;
   }
-
-  // Group by project
-  const byProject = {};
-  for (const item of filtered.sort((a,b) => b.doneAt.localeCompare(a.doneAt))) {
-    const projName = item.projectName || 'Unknown Project';
-    if (!byProject[projName]) byProject[projName] = [];
-    byProject[projName].push(item);
-  }
-
-  let html = '';
-  for (const [projName, items] of Object.entries(byProject)) {
-    html += `<div class="archive-group"><div class="archive-month">${esc(projName)}</div>`;
-    for (const item of items) {
-      const d = new Date(item.doneAt + 'T12:00:00');
-      const dateStr = d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
-      html += `
-        <div class="archive-row${isReadOnly ? ' readonly' : ''}" style="cursor:pointer" onclick="openReadOnlyModal(state.archive.find(a=>a.id==='${item.id}'),'archive')">
-          <div class="archive-date">✔ ${dateStr}</div>
-          <div class="archive-owner">${esc(item.owner || '—')}</div>
-          <div class="archive-desc">${esc(item.desc)}</div>
-          ${isReadOnly ? '' : `<div class="task-del" onclick="event.stopPropagation();deleteArchiveItem('${item.id}')" title="Delete archived task">✕</div>`}
-        </div>
-      `;
-    }
-    html += `</div>`;
-  }
-  main.innerHTML = html;
+  const sorted = filtered.sort((a,b) => (b.doneAt || '').localeCompare(a.doneAt || ''));
+  main.innerHTML = renderProjectGroups(sorted, 'archive', item => item.projectName || 'Unknown Project');
 }
 
 function renderOnHold() {
   const main = document.getElementById('main-content');
-  const filtered = state.onhold.filter(matchesSearch);
   if (state.onhold.length === 0) {
     main.innerHTML = `<div class="empty">No tasks on hold.<br>Paused tasks will appear here.</div>`;
     return;
   }
+  const filtered = state.onhold.filter(matchesSearch);
   if (searchQuery && filtered.length === 0) {
     main.innerHTML = `<div class="search-no-results">No held tasks matching "${esc(searchQuery)}"</div>`;
     return;
   }
-
-  // Group by project
-  const byProject = {};
-  for (const item of filtered) {
-    const projName = item.projectName || 'Unknown Project';
-    if (!byProject[projName]) byProject[projName] = [];
-    byProject[projName].push(item);
-  }
-
-  let html = '';
-  for (const [projName, items] of Object.entries(byProject)) {
-    html += `<div class="onhold-group"><div class="onhold-project-label">${esc(projName)}</div>`;
-    for (const item of items) {
-      const d = new Date(item.heldAt + 'T12:00:00');
-      const dateStr = d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
-      const age = taskAge(item.createdAt);
-      const ac = ageClass(item.createdAt);
-      const ageBadge = age ? `<span class="task-age ${ac}" title="Created ${item.createdAt}">${age}</span>` : '';
-      const dl = dueDateLabel(item.dueDate);
-      const dc = dueDateClass(item.dueDate);
-      const dueBadge = dl ? `<span class="task-due ${dc}" title="Due ${item.dueDate}">📅 ${dl}</span>` : '';
-      html += `
-        <div class="onhold-row${isReadOnly ? ' readonly' : ''}" style="cursor:pointer" onclick="openReadOnlyModal(state.onhold.find(h=>h.id==='${item.id}'),'onhold')">
-          <div class="onhold-status">
-            <span class="status-pill">ON HOLD</span>
-          </div>
-          <div class="onhold-desc">
-            <span class="task-title">${esc(item.desc)}</span>
-            ${item.note ? `<span class="task-note">${esc(item.note)}</span>` : ''}
-            <span class="task-meta">Held ${dateStr} · was ${esc(item.priorStatus || 'TODO')}</span>
-            ${renderSubtaskBadgeHeld(item)}
-            ${renderProgressBar(getEffectiveProgress(item))}
-          </div>
-          <div class="onhold-owner">${esc(item.owner || '—')}${ageBadge}${dueBadge}</div>
-          <div class="onhold-actions">
-            ${isReadOnly ? '' : `<button class="resume-btn" onclick="event.stopPropagation();returnToActive('${item.id}')" title="Return to active tasks">▶ Resume</button>
-            <div class="task-del" onclick="event.stopPropagation();deleteHeldTask('${item.id}')" title="Delete task" style="border:none;padding:4px 6px">✕</div>`}
-          </div>
-        </div>
-      `;
-    }
-    html += `</div>`;
-  }
-  main.innerHTML = html;
+  // Display with priorStatus as the visible status
+  const displayItems = filtered.map(item => Object.assign({}, item, { status: item.priorStatus || 'TODO' }));
+  main.innerHTML = renderProjectGroups(displayItems, 'onhold', item => item.projectName || 'Unknown Project');
 }
 
 function renderTrash() {
@@ -2710,211 +3025,161 @@ function renderTrash() {
   let html = '';
   if (!isReadOnly) {
     html += `<div class="trash-header-row">
-      <span class="trash-purge-info">Items auto-purge after 30 days</span>
+      <span class="trash-purge-info">Items auto-purge after ${state.settings.trashPurge === 'never' ? 'never (disabled)' : state.settings.trashPurge + ' days'}</span>
       <button class="empty-trash-btn" onclick="emptyTrash()">🗑 Empty Trash</button>
     </div>`;
   }
 
-  // Group by source type
-  const sourceLabels = { active: 'Tasks', onhold: 'On Hold', archive: 'Archived', project: 'Projects' };
-  const bySource = {};
-  for (const item of filtered.sort((a,b) => b.deletedAt.localeCompare(a.deletedAt))) {
-    const src = item.source || 'active';
-    if (!bySource[src]) bySource[src] = [];
-    bySource[src].push(item);
-  }
+  // Unwrap trash items into task-like objects, grouped by project name
+  const sorted = [...filtered].sort((a,b) => b.deletedAt.localeCompare(a.deletedAt));
+  const taskLikes = sorted.map(item =>
+    Object.assign({}, item.data, { _trashId: item.id, status: item.data.status || 'TODO', projectName: item.data.projectName || 'Unknown Project' })
+  );
 
-  for (const [source, items] of Object.entries(bySource)) {
-    html += `<div class="trash-group"><div class="trash-group-label">${sourceLabels[source] || source}</div>`;
-    for (const item of items) {
-      const d = new Date(item.deletedAt + 'T12:00:00');
-      const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      const daysLeft = Math.max(0, 30 - Math.floor((Date.now() - d.getTime()) / 86400000));
-      const desc = item.data.desc || item.data.name || '(unknown)';
-      const owner = item.data.owner || '';
-      const sourceTag = source === 'project'
-        ? '<span class="trash-source-tag">PROJECT</span>'
-        : (item.data.projectName ? `<span class="trash-source-tag">${esc(item.data.projectName)}</span>` : '');
-      html += `
-        <div class="trash-row">
-          <div class="trash-desc">
-            <span class="task-title">${esc(desc)}${sourceTag}</span>
-          </div>
-          <div class="trash-owner">${esc(owner)}</div>
-          <div class="trash-date">Deleted ${dateStr} · ${daysLeft}d left</div>
-          <div class="trash-actions">
-            ${isReadOnly ? '' : `<button class="trash-restore-btn" onclick="restoreFromTrash('${item.id}')" title="Restore this item">↩</button>
-            <div class="task-del" onclick="permanentDeleteTrash('${item.id}')" title="Permanently delete">✕</div>`}
-          </div>
-        </div>
-      `;
-    }
-    html += `</div>`;
-  }
+  html += renderProjectGroups(taskLikes, 'trash', item => item.projectName || 'Unknown Project');
   main.innerHTML = html;
 }
 
 // ─── DRAG AND DROP ────────────────────────────────────────────────────────────
 
-let dragType = null;   // 'task', 'project', or 'subtask'
-let dragId = null;     // id of the item being dragged
-let dragParentId = null; // parent task id for subtask drags
-let dragStartedFromGrip = false;
+let dragState = { type: null, id: null, parentId: null, startedFromGrip: false };
+
+function handleDragStart(e) {
+  if (isReadOnly || !dragState.startedFromGrip) { e.preventDefault(); return; }
+
+  const subtaskEl = e.target.closest('.subtask-container .task[draggable]');
+  if (subtaskEl) {
+    dragState.type = 'subtask';
+    dragState.id = subtaskEl.dataset.id;
+    dragState.parentId = subtaskEl.dataset.parentId;
+    subtaskEl.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', dragState.id);
+    return;
+  }
+
+  const taskEl = e.target.closest('.task[draggable]');
+  const projEl = e.target.closest('.project-group[draggable]');
+
+  if (taskEl) {
+    dragState.type = 'task';
+    dragState.id = taskEl.dataset.id;
+    taskEl.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', dragState.id);
+  } else if (projEl) {
+    dragState.type = 'project';
+    dragState.id = projEl.dataset.projectId;
+    projEl.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', dragState.id);
+  }
+}
+
+function showDropIndicator(target, e) {
+  const rect = target.getBoundingClientRect();
+  const mid = rect.top + rect.height / 2;
+  if (e.clientY < mid) {
+    target.classList.add('drag-over-above');
+  } else {
+    target.classList.add('drag-over-below');
+  }
+}
+
+function handleDragOver(e) {
+  if (!dragState.id) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+
+  const main = document.getElementById('main-content');
+  main.querySelectorAll('.drag-over-above, .drag-over-below').forEach(el => {
+    el.classList.remove('drag-over-above', 'drag-over-below');
+  });
+
+  if (dragState.type === 'subtask') {
+    const target = e.target.closest('.subtask-container .task[draggable]');
+    if (!target || target.dataset.id === dragState.id) return;
+    if (target.dataset.parentId !== dragState.parentId) return;
+    showDropIndicator(target, e);
+  } else if (dragState.type === 'task') {
+    const target = e.target.closest('.task[draggable]');
+    if (!target || target.dataset.id === dragState.id) return;
+    const sourceTask = state.tasks.find(t => t.id === dragState.id);
+    const targetTask = state.tasks.find(t => t.id === target.dataset.id);
+    if (!sourceTask || !targetTask || sourceTask.projectId !== targetTask.projectId) return;
+    showDropIndicator(target, e);
+  } else if (dragState.type === 'project') {
+    const target = e.target.closest('.project-group[draggable]');
+    if (!target || target.dataset.projectId === dragState.id) return;
+    showDropIndicator(target, e);
+  }
+}
+
+function dropReorder(arr, sourceItem, target, e) {
+  const sourceIdx = arr.indexOf(sourceItem);
+  arr.splice(sourceIdx, 1);
+  let targetIdx = arr.indexOf(target);
+  const rect = e.target.closest('[draggable]').getBoundingClientRect();
+  const mid = rect.top + rect.height / 2;
+  if (e.clientY >= mid) targetIdx++;
+  arr.splice(targetIdx, 0, sourceItem);
+}
+
+function handleDrop(e) {
+  if (!dragState.id) return;
+  e.preventDefault();
+
+  if (dragState.type === 'subtask') {
+    const target = e.target.closest('.subtask-container .task[draggable]');
+    if (!target || target.dataset.id === dragState.id) { cleanupDrag(); return; }
+    if (target.dataset.parentId !== dragState.parentId) { cleanupDrag(); return; }
+    const parentTask = state.tasks.find(t => t.id === dragState.parentId);
+    if (!parentTask || !parentTask.subtasks) { cleanupDrag(); return; }
+    const sourceIdx = parentTask.subtasks.findIndex(s => s.id === dragState.id);
+    if (sourceIdx === -1) { cleanupDrag(); return; }
+    pushUndo();
+    const [sourceSub] = parentTask.subtasks.splice(sourceIdx, 1);
+    let targetIdx = parentTask.subtasks.findIndex(s => s.id === target.dataset.id);
+    const rect = target.getBoundingClientRect();
+    const mid = rect.top + rect.height / 2;
+    if (e.clientY >= mid) targetIdx++;
+    parentTask.subtasks.splice(targetIdx, 0, sourceSub);
+    saveState();
+    render();
+  } else if (dragState.type === 'task') {
+    const target = e.target.closest('.task[draggable]');
+    if (!target || target.dataset.id === dragState.id) { cleanupDrag(); return; }
+    const sourceTask = state.tasks.find(t => t.id === dragState.id);
+    const targetTask = state.tasks.find(t => t.id === target.dataset.id);
+    if (!sourceTask || !targetTask || sourceTask.projectId !== targetTask.projectId) { cleanupDrag(); return; }
+    pushUndo();
+    dropReorder(state.tasks, sourceTask, targetTask, e);
+    saveState();
+    render();
+  } else if (dragState.type === 'project') {
+    const target = e.target.closest('.project-group[draggable]');
+    if (!target || target.dataset.projectId === dragState.id) { cleanupDrag(); return; }
+    const sourceProj = state.projects.find(p => p.id === dragState.id);
+    const targetProj = state.projects.find(p => p.id === target.dataset.projectId);
+    if (!sourceProj || !targetProj) { cleanupDrag(); return; }
+    pushUndo();
+    dropReorder(state.projects, sourceProj, targetProj, e);
+    saveState();
+    render();
+  }
+
+  cleanupDrag();
+}
 
 function initDragAndDrop() {
   const main = document.getElementById('main-content');
-
-  // Track whether mousedown started on a grip (dragstart e.target is the draggable, not the clicked child)
   main.addEventListener('mousedown', e => {
-    dragStartedFromGrip = !!e.target.closest('.drag-grip, .project-grip');
+    dragState.startedFromGrip = !!e.target.closest('.drag-grip, .project-grip');
   });
-
-  main.addEventListener('dragstart', e => {
-    if (isReadOnly || !dragStartedFromGrip) { e.preventDefault(); return; }
-
-    // Check subtask drag first (subtasks are inside .subtask-container)
-    const subtaskEl = e.target.closest('.subtask-container .task[draggable]');
-    if (subtaskEl) {
-      dragType = 'subtask';
-      dragId = subtaskEl.dataset.id;
-      dragParentId = subtaskEl.dataset.parentId;
-      subtaskEl.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', dragId);
-      return;
-    }
-
-    const taskEl = e.target.closest('.task[draggable]');
-    const projEl = e.target.closest('.project-group[draggable]');
-
-    if (taskEl) {
-      dragType = 'task';
-      dragId = taskEl.dataset.id;
-      taskEl.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', dragId);
-    } else if (projEl) {
-      dragType = 'project';
-      dragId = projEl.dataset.projectId;
-      projEl.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', dragId);
-    }
-  });
-
-  main.addEventListener('dragover', e => {
-    if (!dragId) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-
-    // Clear all indicators
-    main.querySelectorAll('.drag-over-above, .drag-over-below').forEach(el => {
-      el.classList.remove('drag-over-above', 'drag-over-below');
-    });
-
-    if (dragType === 'subtask') {
-      const target = e.target.closest('.subtask-container .task[draggable]');
-      if (!target || target.dataset.id === dragId) return;
-      if (target.dataset.parentId !== dragParentId) return;
-      const rect = target.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY < mid) {
-        target.classList.add('drag-over-above');
-      } else {
-        target.classList.add('drag-over-below');
-      }
-    } else if (dragType === 'task') {
-      const target = e.target.closest('.task[draggable]');
-      if (!target || target.dataset.id === dragId) return;
-      // Only allow reorder within same project
-      const sourceTask = state.tasks.find(t => t.id === dragId);
-      const targetTask = state.tasks.find(t => t.id === target.dataset.id);
-      if (!sourceTask || !targetTask || sourceTask.projectId !== targetTask.projectId) return;
-      const rect = target.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY < mid) {
-        target.classList.add('drag-over-above');
-      } else {
-        target.classList.add('drag-over-below');
-      }
-    } else if (dragType === 'project') {
-      const target = e.target.closest('.project-group[draggable]');
-      if (!target || target.dataset.projectId === dragId) return;
-      const rect = target.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY < mid) {
-        target.classList.add('drag-over-above');
-      } else {
-        target.classList.add('drag-over-below');
-      }
-    }
-  });
-
-  main.addEventListener('drop', e => {
-    if (!dragId) return;
-    e.preventDefault();
-
-    if (dragType === 'subtask') {
-      const target = e.target.closest('.subtask-container .task[draggable]');
-      if (!target || target.dataset.id === dragId) { cleanupDrag(); return; }
-      if (target.dataset.parentId !== dragParentId) { cleanupDrag(); return; }
-      const parentTask = state.tasks.find(t => t.id === dragParentId);
-      if (!parentTask || !parentTask.subtasks) { cleanupDrag(); return; }
-      const sourceIdx = parentTask.subtasks.findIndex(s => s.id === dragId);
-      if (sourceIdx === -1) { cleanupDrag(); return; }
-      pushUndo();
-      const [sourceSub] = parentTask.subtasks.splice(sourceIdx, 1);
-      let targetIdx = parentTask.subtasks.findIndex(s => s.id === target.dataset.id);
-      const rect = target.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY >= mid) targetIdx++;
-      parentTask.subtasks.splice(targetIdx, 0, sourceSub);
-      saveState();
-      render();
-    } else if (dragType === 'task') {
-      const target = e.target.closest('.task[draggable]');
-      if (!target || target.dataset.id === dragId) { cleanupDrag(); return; }
-      const sourceTask = state.tasks.find(t => t.id === dragId);
-      const targetTask = state.tasks.find(t => t.id === target.dataset.id);
-      if (!sourceTask || !targetTask || sourceTask.projectId !== targetTask.projectId) { cleanupDrag(); return; }
-
-      pushUndo();
-      // Remove source from array
-      const sourceIdx = state.tasks.indexOf(sourceTask);
-      state.tasks.splice(sourceIdx, 1);
-      // Find target's new index and insert above or below
-      let targetIdx = state.tasks.indexOf(targetTask);
-      const rect = target.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY >= mid) targetIdx++;
-      state.tasks.splice(targetIdx, 0, sourceTask);
-      saveState();
-      render();
-    } else if (dragType === 'project') {
-      const target = e.target.closest('.project-group[draggable]');
-      if (!target || target.dataset.projectId === dragId) { cleanupDrag(); return; }
-
-      pushUndo();
-      const sourceProj = state.projects.find(p => p.id === dragId);
-      const targetProj = state.projects.find(p => p.id === target.dataset.projectId);
-      if (!sourceProj || !targetProj) { cleanupDrag(); return; }
-      const sourceIdx = state.projects.indexOf(sourceProj);
-      state.projects.splice(sourceIdx, 1);
-      let targetIdx = state.projects.indexOf(targetProj);
-      const rect = target.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2;
-      if (e.clientY >= mid) targetIdx++;
-      state.projects.splice(targetIdx, 0, sourceProj);
-      saveState();
-      render();
-    }
-
-    cleanupDrag();
-  });
-
-  main.addEventListener('dragend', e => {
-    cleanupDrag();
-  });
+  main.addEventListener('dragstart', handleDragStart);
+  main.addEventListener('dragover', handleDragOver);
+  main.addEventListener('drop', handleDrop);
+  main.addEventListener('dragend', cleanupDrag);
 }
 
 function cleanupDrag() {
@@ -2922,10 +3187,7 @@ function cleanupDrag() {
   document.querySelectorAll('.drag-over-above, .drag-over-below').forEach(el => {
     el.classList.remove('drag-over-above', 'drag-over-below');
   });
-  dragType = null;
-  dragId = null;
-  dragParentId = null;
-  dragStartedFromGrip = false;
+  dragState = { type: null, id: null, parentId: null, startedFromGrip: false };
 }
 
 // ─── UNDO ─────────────────────────────────────────────────────────────────────
@@ -2939,11 +3201,19 @@ function pushUndo() {
     trash: JSON.parse(JSON.stringify(state.trash)),
   });
   if (undoStack.length > MAX_UNDO) undoStack.shift();
-  updateUndoBtn();
+  redoStack = [];
+  updateUndoRedoBtns();
 }
 
 function undo() {
   if (undoStack.length === 0) return;
+  redoStack.push({
+    projects: JSON.parse(JSON.stringify(state.projects)),
+    tasks: JSON.parse(JSON.stringify(state.tasks)),
+    onhold: JSON.parse(JSON.stringify(state.onhold)),
+    archive: JSON.parse(JSON.stringify(state.archive)),
+    trash: JSON.parse(JSON.stringify(state.trash)),
+  });
   const snapshot = undoStack.pop();
   state.projects = snapshot.projects;
   state.tasks = snapshot.tasks;
@@ -2952,12 +3222,36 @@ function undo() {
   state.trash = snapshot.trash;
   saveState();
   render();
-  updateUndoBtn();
+  updateUndoRedoBtns();
+  showToast('Undone');
 }
 
-function updateUndoBtn() {
-  const btn = document.getElementById('undoBtn');
-  if (btn) btn.classList.toggle('visible', undoStack.length > 0);
+function redo() {
+  if (redoStack.length === 0) return;
+  undoStack.push({
+    projects: JSON.parse(JSON.stringify(state.projects)),
+    tasks: JSON.parse(JSON.stringify(state.tasks)),
+    onhold: JSON.parse(JSON.stringify(state.onhold)),
+    archive: JSON.parse(JSON.stringify(state.archive)),
+    trash: JSON.parse(JSON.stringify(state.trash)),
+  });
+  const snapshot = redoStack.pop();
+  state.projects = snapshot.projects;
+  state.tasks = snapshot.tasks;
+  state.onhold = snapshot.onhold;
+  state.archive = snapshot.archive;
+  state.trash = snapshot.trash;
+  saveState();
+  render();
+  updateUndoRedoBtns();
+  showToast('Redone');
+}
+
+function updateUndoRedoBtns() {
+  const undoBtn = document.getElementById('undoBtn');
+  if (undoBtn) undoBtn.classList.toggle('visible', undoStack.length > 0);
+  const redoBtn = document.getElementById('redoBtn');
+  if (redoBtn) redoBtn.classList.toggle('visible', redoStack.length > 0);
 }
 
 // ─── ACTIONS ──────────────────────────────────────────────────────────────────
@@ -2978,23 +3272,14 @@ function cycleStatus(taskId) {
 
   pushUndo();
   if (next === 'DONE') {
-    const proj = state.projects.find(p => p.id === task.projectId);
-    state.archive.unshift({
-      id: 'a' + Date.now(),
-      projectId: task.projectId,
-      projectName: proj ? proj.name : '',
-      desc: task.desc,
-      note: task.note,
-      owner: task.owner,
-      doneAt: new Date().toISOString().split('T')[0],
-    });
-    state.tasks = state.tasks.filter(t => t.id !== taskId);
+    archiveTask(task);
   } else {
     task.status = next;
   }
 
   saveState();
   render();
+  showToast(next === 'DONE' ? 'Task archived' : 'Task started');
 }
 
 function deleteTask(taskId) {
@@ -3002,15 +3287,11 @@ function deleteTask(taskId) {
   if (!task) return;
   pushUndo();
   const proj = state.projects.find(p => p.id === task.projectId);
-  state.trash.unshift({
-    id: 'x' + Date.now(),
-    source: 'active',
-    data: Object.assign({}, task, { projectName: proj ? proj.name : '' }),
-    deletedAt: new Date().toISOString().split('T')[0],
-  });
+  moveToTrash('active', Object.assign({}, task, { projectName: proj ? proj.name : '' }));
   state.tasks = state.tasks.filter(t => t.id !== taskId);
   saveState();
   render();
+  showToast('Moved to Trash');
 }
 
 function holdTask(taskId) {
@@ -3030,11 +3311,12 @@ function holdTask(taskId) {
     dueDate: task.dueDate || '',
     progress: task.progress || 0,
     subtasks: task.subtasks ? JSON.parse(JSON.stringify(task.subtasks)) : [],
-    heldAt: new Date().toISOString().split('T')[0],
+    heldAt: today(),
   });
   state.tasks = state.tasks.filter(t => t.id !== taskId);
   saveState();
   render();
+  showToast('Task moved to On Hold');
 }
 
 function returnToActive(holdId) {
@@ -3052,7 +3334,7 @@ function returnToActive(holdId) {
     note: item.note,
     owner: item.owner,
     status: item.priorStatus || 'TODO',
-    createdAt: item.createdAt || new Date().toISOString().split('T')[0],
+    createdAt: item.createdAt || today(),
     dueDate: item.dueDate || '',
     progress: item.progress || 0,
     subtasks: item.subtasks ? JSON.parse(JSON.stringify(item.subtasks)) : [],
@@ -3060,36 +3342,54 @@ function returnToActive(holdId) {
   state.onhold = state.onhold.filter(h => h.id !== holdId);
   saveState();
   render();
+  showToast('Task returned to Active');
 }
 
 function deleteHeldTask(holdId) {
   const item = state.onhold.find(h => h.id === holdId);
   if (!item) return;
   pushUndo();
-  state.trash.unshift({
-    id: 'x' + Date.now(),
-    source: 'onhold',
-    data: Object.assign({}, item),
-    deletedAt: new Date().toISOString().split('T')[0],
-  });
+  moveToTrash('onhold', Object.assign({}, item));
   state.onhold = state.onhold.filter(h => h.id !== holdId);
   saveState();
   render();
+  showToast('Moved to Trash');
 }
 
 function deleteArchiveItem(archiveId) {
   const item = state.archive.find(a => a.id === archiveId);
   if (!item) return;
   pushUndo();
-  state.trash.unshift({
-    id: 'x' + Date.now(),
-    source: 'archive',
-    data: Object.assign({}, item),
-    deletedAt: new Date().toISOString().split('T')[0],
+  moveToTrash('archive', Object.assign({}, item));
+  state.archive = state.archive.filter(a => a.id !== archiveId);
+  saveState();
+  render();
+  showToast('Moved to Trash');
+}
+
+function returnArchiveToActive(archiveId) {
+  const item = state.archive.find(a => a.id === archiveId);
+  if (!item) return;
+  pushUndo();
+  if (!state.projects.find(p => p.id === item.projectId)) {
+    state.projects.push({ id: item.projectId, name: item.projectName || 'Restored Project' });
+  }
+  state.tasks.push({
+    id: 't' + Date.now(),
+    projectId: item.projectId,
+    desc: item.desc,
+    note: item.note,
+    owner: item.owner,
+    status: 'WORKING',
+    createdAt: item.createdAt || today(),
+    dueDate: item.dueDate || '',
+    progress: item.progress || 0,
+    subtasks: item.subtasks ? JSON.parse(JSON.stringify(item.subtasks)) : [],
   });
   state.archive = state.archive.filter(a => a.id !== archiveId);
   saveState();
   render();
+  showToast('Task reopened');
 }
 
 function quickAdd(projectId, descInput) {
@@ -3107,11 +3407,12 @@ function quickAdd(projectId, descInput) {
     note: '',
     owner,
     status,
-    createdAt: new Date().toISOString().split('T')[0],
+    createdAt: today(),
   });
 
   saveState();
   render();
+  showToast('Task added');
 }
 
 function quickAddFromRow(projectId, btn) {
@@ -3128,44 +3429,34 @@ function addProject() {
   state.projects.push({ id: 'p' + Date.now(), name });
   saveState();
   render();
+  showToast('Project created');
 }
 
 function deleteProject(projId) {
   const proj = state.projects.find(p => p.id === projId);
   if (!proj) return;
-  if (!confirm(`Remove "${proj.name}" and all its tasks? They will be moved to Trash.`)) return;
+  const activeCount = state.tasks.filter(t => t.projectId === projId).length;
+  const holdCount = state.onhold.filter(h => h.projectId === projId).length;
+  const parts = [];
+  if (activeCount) parts.push(activeCount + ' active task' + (activeCount > 1 ? 's' : ''));
+  if (holdCount) parts.push(holdCount + ' on-hold task' + (holdCount > 1 ? 's' : ''));
+  const detail = parts.length ? parts.join(' and ') + ' will be moved to Trash.' : 'No tasks to move.';
+  if (!confirm(`Remove "${proj.name}"? ${detail}`)) return;
   pushUndo();
-  const now = new Date().toISOString().split('T')[0];
-  // Trash the project itself
-  state.trash.unshift({
-    id: 'x' + Date.now(),
-    source: 'project',
-    data: Object.assign({}, proj, { taskIds: state.tasks.filter(t => t.projectId === projId).map(t => t.id), holdIds: state.onhold.filter(h => h.projectId === projId).map(h => h.id) }),
-    deletedAt: now,
-  });
-  // Trash each active task in the project
+  // Trash each active task in the project (project re-creates on restore via projectName)
   for (const task of state.tasks.filter(t => t.projectId === projId)) {
-    state.trash.unshift({
-      id: 'x' + (Date.now() + Math.random()),
-      source: 'active',
-      data: Object.assign({}, task, { projectName: proj.name }),
-      deletedAt: now,
-    });
+    moveToTrash('active', Object.assign({}, task, { projectName: proj.name }));
   }
   // Trash each held task in the project
   for (const item of state.onhold.filter(h => h.projectId === projId)) {
-    state.trash.unshift({
-      id: 'x' + (Date.now() + Math.random()),
-      source: 'onhold',
-      data: Object.assign({}, item),
-      deletedAt: now,
-    });
+    moveToTrash('onhold', Object.assign({}, item));
   }
   state.projects = state.projects.filter(p => p.id !== projId);
   state.tasks = state.tasks.filter(t => t.projectId !== projId);
   state.onhold = state.onhold.filter(h => h.projectId !== projId);
   saveState();
   render();
+  showToast('Project deleted');
 }
 
 function newTemplate() {
@@ -3180,19 +3471,45 @@ function newTemplate() {
   render();
 }
 
+let renamingProjectId = null;
+
 function renameProject(projId) {
   const proj = state.projects.find(p => p.id === projId);
   if (!proj) return;
-  const name = prompt('Rename project:', proj.name);
-  if (name && name.trim()) {
-    pushUndo();
-    proj.name = name.trim();
-    // Update project name on held and archived items
-    state.onhold.filter(h => h.projectId === projId).forEach(h => h.projectName = proj.name);
-    state.archive.filter(a => a.projectId === projId).forEach(a => a.projectName = proj.name);
-    saveState();
-    render();
-  }
+  renamingProjectId = projId;
+  const input = document.getElementById('renameInput');
+  input.value = proj.name;
+  document.getElementById('renameModal').classList.add('open');
+  setTimeout(() => { input.focus(); input.select(); }, 50);
+}
+
+function confirmRename() {
+  const name = document.getElementById('renameInput').value.trim();
+  if (!name || !renamingProjectId) { closeRename(); return; }
+  const proj = state.projects.find(p => p.id === renamingProjectId);
+  if (!proj) { closeRename(); return; }
+  pushUndo();
+  proj.name = name;
+  // Update project name on held and archived items
+  state.onhold.filter(h => h.projectId === renamingProjectId).forEach(h => h.projectName = proj.name);
+  state.archive.filter(a => a.projectId === renamingProjectId).forEach(a => a.projectName = proj.name);
+  closeRename();
+  saveState();
+  render();
+  showToast('Project renamed');
+}
+
+function closeRename() {
+  document.getElementById('renameModal').classList.remove('open');
+  renamingProjectId = null;
+}
+
+function openHelp() {
+  document.getElementById('helpModal').classList.add('open');
+}
+
+function closeHelp() {
+  document.getElementById('helpModal').classList.remove('open');
 }
 
 function toggleCollapse(projId) {
@@ -3205,11 +3522,14 @@ function toggleCollapse(projId) {
 }
 
 function toggleCollapseAll() {
-  const allCollapsed = state.projects.length > 0 && state.projects.every(p => collapsedProjects.has(p.id));
+  // Get all project group IDs currently rendered on the page
+  const groupEls = document.querySelectorAll('.project-group[data-project-id]');
+  const groupIds = Array.from(groupEls).map(el => el.dataset.projectId);
+  const allCollapsed = groupIds.length > 0 && groupIds.every(id => collapsedProjects.has(id));
   if (allCollapsed) {
-    collapsedProjects.clear();
+    groupIds.forEach(id => collapsedProjects.delete(id));
   } else {
-    state.projects.forEach(p => collapsedProjects.add(p.id));
+    groupIds.forEach(id => collapsedProjects.add(id));
   }
   render();
 }
@@ -3233,18 +3553,17 @@ function restoreFromTrash(trashId) {
     }
     state.onhold.push(item.data);
   } else if (item.source === 'archive') {
-    state.archive.push(item.data);
-  } else if (item.source === 'project') {
-    // Restore the project (but not its tasks — those have their own trash entries)
-    const { taskIds, holdIds, ...projData } = item.data;
-    if (!state.projects.find(p => p.id === projData.id)) {
-      state.projects.push({ id: projData.id, name: projData.name });
+    if (item.data.projectId && !state.projects.find(p => p.id === item.data.projectId)) {
+      state.projects.push({ id: item.data.projectId, name: item.data.projectName || 'Restored Project' });
     }
+    state.archive.push(item.data);
   }
 
+  const dest = item.source === 'active' ? 'Active' : item.source === 'onhold' ? 'On Hold' : 'Archive';
   state.trash = state.trash.filter(t => t.id !== trashId);
   saveState();
   render();
+  showToast('Restored to ' + dest);
 }
 
 function permanentDeleteTrash(trashId) {
@@ -3253,6 +3572,7 @@ function permanentDeleteTrash(trashId) {
   state.trash = state.trash.filter(t => t.id !== trashId);
   saveState();
   render();
+  showToast('Permanently deleted');
 }
 
 function emptyTrash() {
@@ -3261,72 +3581,120 @@ function emptyTrash() {
   state.trash = [];
   saveState();
   render();
+  showToast('Trash emptied');
 }
 
 function purgeOldTrash() {
-  const now = Date.now();
-  const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+  const setting = (state.settings && state.settings.trashPurge) || '30';
+  if (setting === 'never') return 0;
+  const days = parseInt(setting);
+  if (!days || days <= 0) return 0;
+  const threshold = Date.now() - (days * 24 * 60 * 60 * 1000);
   const before = state.trash.length;
   state.trash = state.trash.filter(t => {
     const del = new Date(t.deletedAt + 'T12:00:00').getTime();
-    return (now - del) < thirtyDays;
+    return del >= threshold;
   });
-  if (state.trash.length < before) {
-    saveState(); // silently persist the purge
+  const count = before - state.trash.length;
+  if (count > 0) saveState();
+  return count;
+}
+
+function purgeOldArchive() {
+  const setting = (state.settings && state.settings.archivePurge) || 'never';
+  if (setting === 'never') return 0;
+  const days = parseInt(setting);
+  if (!days || days <= 0) return 0;
+  const threshold = Date.now() - (days * 24 * 60 * 60 * 1000);
+  const toPurge = state.archive.filter(a => {
+    const doneDate = new Date((a.doneAt || '2000-01-01') + 'T12:00:00').getTime();
+    return doneDate < threshold;
+  });
+  if (toPurge.length === 0) return 0;
+  for (const item of toPurge) {
+    moveToTrash('archive', Object.assign({}, item));
   }
+  state.archive = state.archive.filter(a => {
+    const doneDate = new Date((a.doneAt || '2000-01-01') + 'T12:00:00').getTime();
+    return doneDate >= threshold;
+  });
+  saveState();
+  return toPurge.length;
+}
+
+function manualPurgeArchive() {
+  const days = parseInt(state.settings.archivePurge);
+  if (!days) {
+    alert('Set an archive purge interval in the dropdown first.');
+    return;
+  }
+  // Preview count before purging
+  const threshold = Date.now() - (days * 24 * 60 * 60 * 1000);
+  const count = state.archive.filter(a => {
+    const doneDate = new Date((a.doneAt || '2000-01-01') + 'T12:00:00').getTime();
+    return doneDate < threshold;
+  }).length;
+  if (count === 0) {
+    alert('No archived items older than ' + days + ' days.');
+    return;
+  }
+  if (!confirm('Purge ' + count + ' archived item' + (count > 1 ? 's' : '') + ' older than ' + days + ' days? They will be moved to Trash.')) return;
+  pushUndo();
+  const purged = purgeOldArchive();
+  render();
+  showToast(purged + ' item' + (purged > 1 ? 's' : '') + ' purged');
+}
+
+function manualPurgeTrash() {
+  const days = parseInt(state.settings.trashPurge);
+  if (!days) {
+    alert('Set a trash purge interval in the dropdown first.');
+    return;
+  }
+  // Preview count before purging
+  const threshold = Date.now() - (days * 24 * 60 * 60 * 1000);
+  const count = state.trash.filter(t => {
+    const del = new Date(t.deletedAt + 'T12:00:00').getTime();
+    return del < threshold;
+  }).length;
+  if (count === 0) {
+    alert('No trash items older than ' + days + ' days.');
+    return;
+  }
+  if (!confirm('Permanently delete ' + count + ' trash item' + (count > 1 ? 's' : '') + ' older than ' + days + ' days? This cannot be undone.')) return;
+  pushUndo();
+  const purged = purgeOldTrash();
+  render();
+  showToast(purged + ' item' + (purged > 1 ? 's' : '') + ' purged');
 }
 
 // ─── MODAL ────────────────────────────────────────────────────────────────────
 
 function openAddTask() {
-  editingTaskId = null;
-  editingSubtaskParentId = null;
-  editingSubtaskId = null;
-  modalStatus = 'TODO';
-  document.getElementById('modalTitle').textContent = 'New Task';
-  document.getElementById('m-desc').value = '';
-  document.getElementById('m-note').value = '';
-  document.getElementById('m-owner').value = '';
-  document.getElementById('m-due').value = '';
-  document.getElementById('m-progress').value = 0;
-  document.getElementById('m-progress-label').textContent = '0%';
-  document.getElementById('m-progress').disabled = false;
-  document.getElementById('m-status').value = 'TODO';
-  document.getElementById('m-project-row').style.display = '';
-  document.getElementById('m-created-override').checked = false;
-  document.getElementById('m-created-field').classList.remove('visible');
-  document.getElementById('m-created-date').value = '';
-  populateProjectSelect();
-  document.getElementById('taskModal').classList.add('open');
-  updateModalPreview();
+  modalState = { taskId: null, subtaskParentId: null, subtaskId: null, status: 'TODO' };
+  populateModal({ title: 'New Task', status: 'TODO' });
   setTimeout(() => document.getElementById('m-desc').focus(), 50);
 }
 
 function editTask(taskId) {
   const task = state.tasks.find(t => t.id === taskId);
   if (!task) return;
-  editingTaskId = taskId;
-  editingSubtaskParentId = null;
-  editingSubtaskId = null;
-  modalStatus = task.status;
-  document.getElementById('modalTitle').textContent = 'Edit Task';
-  document.getElementById('m-desc').value = task.desc;
-  document.getElementById('m-note').value = task.note || '';
-  document.getElementById('m-owner').value = task.owner || '';
-  document.getElementById('m-due').value = task.dueDate || '';
-  const prog = getEffectiveProgress(task);
-  document.getElementById('m-progress').value = prog;
-  document.getElementById('m-progress-label').textContent = prog + '%';
-  const hasSubtasks = task.subtasks && task.subtasks.length > 0;
-  document.getElementById('m-progress').disabled = hasSubtasks;
-  document.getElementById('m-status').value = task.status;
-  document.getElementById('m-project-row').style.display = '';
-  document.getElementById('m-created-override').checked = false;
-  document.getElementById('m-created-field').classList.remove('visible');
-  document.getElementById('m-created-date').value = task.createdAt || '';
-  populateProjectSelect(task.projectId);
-  document.getElementById('taskModal').classList.add('open');
-  updateModalPreview();
+  modalState.taskId = taskId;
+  modalState.subtaskParentId = null;
+  modalState.subtaskId = null;
+  modalState.status = task.status;
+  populateModal({
+    title: 'Edit Task',
+    desc: task.desc,
+    note: task.note,
+    owner: task.owner,
+    dueDate: task.dueDate,
+    progress: getEffectiveProgress(task),
+    progressDisabled: task.subtasks && task.subtasks.length > 0,
+    status: task.status,
+    createdAt: task.createdAt,
+    projectId: task.projectId,
+  });
 }
 
 function populateProjectSelect(selectedId) {
@@ -3336,98 +3704,112 @@ function populateProjectSelect(selectedId) {
   ).join('');
 }
 
-function saveTask() {
-  const desc = document.getElementById('m-desc').value.trim();
-  if (!desc) return;
+function archiveTask(task) {
+  const proj = state.projects.find(p => p.id === task.projectId);
+  state.archive.unshift({
+    id: 'a' + Date.now(),
+    projectId: task.projectId,
+    projectName: proj ? proj.name : '',
+    desc: task.desc,
+    note: task.note,
+    owner: task.owner,
+    status: 'DONE',
+    createdAt: task.createdAt || null,
+    dueDate: task.dueDate || '',
+    progress: task.progress || 0,
+    subtasks: task.subtasks ? JSON.parse(JSON.stringify(task.subtasks)) : [],
+    doneAt: today(),
+  });
+  state.tasks = state.tasks.filter(t => t.id !== task.id);
+}
 
-  const status = modalStatus;
-  const progress = parseInt(document.getElementById('m-progress').value) || 0;
+function readModalFields() {
   const overrideChecked = document.getElementById('m-created-override').checked;
-
-  // Sanitize date inputs before reading values
   validateDateInput(document.getElementById('m-due'));
   if (overrideChecked) validateDateInput(document.getElementById('m-created-date'));
-  const overrideDate = document.getElementById('m-created-date').value;
+  return {
+    desc: document.getElementById('m-desc').value.trim(),
+    note: document.getElementById('m-note').value.trim(),
+    owner: document.getElementById('m-owner').value.trim(),
+    dueDate: document.getElementById('m-due').value || '',
+    progress: parseInt(document.getElementById('m-progress').value) || 0,
+    status: modalState.status,
+    overrideChecked,
+    overrideDate: document.getElementById('m-created-date').value,
+  };
+}
 
-  // ── Saving a SUBTASK ──
-  if (editingSubtaskId && editingSubtaskParentId) {
-    const parent = state.tasks.find(t => t.id === editingSubtaskParentId);
-    if (!parent || !parent.subtasks) { closeModal(); return; }
-    const sub = parent.subtasks.find(s => s.id === editingSubtaskId);
-    if (!sub) { closeModal(); return; }
+function saveSubtask() {
+  const fields = readModalFields();
+  if (!fields.desc) return;
 
-    pushUndo();
-    sub.desc = desc;
-    sub.note = document.getElementById('m-note').value.trim();
-    sub.owner = document.getElementById('m-owner').value.trim();
-    sub.dueDate = document.getElementById('m-due').value || '';
-    sub.progress = progress;
-    sub.status = status;
-    if (status === 'DONE' && !sub.doneAt) {
-      sub.doneAt = new Date().toISOString().split('T')[0];
-    } else if (status !== 'DONE') {
-      delete sub.doneAt;
-    }
-    if (overrideChecked && overrideDate) sub.createdAt = overrideDate;
+  const parent = state.tasks.find(t => t.id === modalState.subtaskParentId);
+  if (!parent || !parent.subtasks) { closeModal(); return; }
+  const sub = parent.subtasks.find(s => s.id === modalState.subtaskId);
+  if (!sub) { closeModal(); return; }
 
-    closeModal();
-    saveState();
-    render();
-    return;
+  pushUndo();
+  sub.desc = fields.desc;
+  sub.note = fields.note;
+  sub.owner = fields.owner;
+  sub.dueDate = fields.dueDate;
+  sub.progress = fields.progress;
+  sub.status = fields.status;
+  if (fields.status === 'DONE' && !sub.doneAt) {
+    sub.doneAt = today();
+  } else if (fields.status !== 'DONE') {
+    delete sub.doneAt;
   }
+  if (fields.overrideChecked && fields.overrideDate) sub.createdAt = fields.overrideDate;
 
-  // ── Saving a regular TASK ──
+  closeModal();
+  saveState();
+  render();
+}
+
+function saveTask() {
+  if (modalState.subtaskId && modalState.subtaskParentId) { saveSubtask(); return; }
+
+  const fields = readModalFields();
+  if (!fields.desc) return;
 
   // Parent gating: can't mark DONE if any subtask is incomplete
-  const existingTask = editingTaskId ? state.tasks.find(t => t.id === editingTaskId) : null;
+  const existingTask = modalState.taskId ? state.tasks.find(t => t.id === modalState.taskId) : null;
   const subs = existingTask ? (existingTask.subtasks || []) : [];
-  if (status === 'DONE' && subs.length > 0 && subs.some(s => s.status !== 'DONE')) {
+  if (fields.status === 'DONE' && subs.length > 0 && subs.some(s => s.status !== 'DONE')) {
     alert('Cannot mark as DONE — all subtasks must be completed first.');
     return;
   }
 
   // If subtasks exist, auto-calculate progress; otherwise use manual slider
-  let effectiveProgress;
-  if (subs.length > 0) {
-    effectiveProgress = Math.round((subs.filter(s => s.status === 'DONE').length / subs.length) * 100);
-  } else {
-    effectiveProgress = progress;
-  }
+  const effectiveProgress = subs.length > 0
+    ? Math.round((subs.filter(s => s.status === 'DONE').length / subs.length) * 100)
+    : fields.progress;
 
   const data = {
     projectId: document.getElementById('m-project').value,
-    desc,
-    note: document.getElementById('m-note').value.trim(),
-    owner: document.getElementById('m-owner').value.trim(),
-    dueDate: document.getElementById('m-due').value || '',
+    desc: fields.desc,
+    note: fields.note,
+    owner: fields.owner,
+    dueDate: fields.dueDate,
     progress: effectiveProgress,
-    status,
+    status: fields.status,
   };
 
   pushUndo();
-  if (editingTaskId) {
-    const task = state.tasks.find(t => t.id === editingTaskId);
+  if (modalState.taskId) {
+    const task = state.tasks.find(t => t.id === modalState.taskId);
     if (task) {
       const existingSubs = task.subtasks;
       Object.assign(task, data);
       task.subtasks = existingSubs;
-      if (overrideChecked && overrideDate) task.createdAt = overrideDate;
+      if (fields.overrideChecked && fields.overrideDate) task.createdAt = fields.overrideDate;
     }
     if (data.status === 'DONE') {
-      const proj = state.projects.find(p => p.id === data.projectId);
-      state.archive.unshift({
-        id: 'a' + Date.now(),
-        projectId: data.projectId,
-        projectName: proj ? proj.name : '',
-        desc: data.desc,
-        note: data.note,
-        owner: data.owner,
-        doneAt: new Date().toISOString().split('T')[0],
-      });
-      state.tasks = state.tasks.filter(t => t.id !== editingTaskId);
+      archiveTask(state.tasks.find(t => t.id === modalState.taskId) || { ...data, id: modalState.taskId });
     }
   } else {
-    const createdAt = (overrideChecked && overrideDate) ? overrideDate : new Date().toISOString().split('T')[0];
+    const createdAt = (fields.overrideChecked && fields.overrideDate) ? fields.overrideDate : today();
     state.tasks.push({ id: 't' + Date.now(), ...data, subtasks: [], createdAt });
   }
 
@@ -3436,12 +3818,21 @@ function saveTask() {
   render();
 }
 
+function isModalDirty() {
+  const init = modalState.initialValues;
+  if (!init) return false;
+  return init.desc !== document.getElementById('m-desc').value ||
+    init.note !== document.getElementById('m-note').value ||
+    init.owner !== document.getElementById('m-owner').value ||
+    init.dueDate !== document.getElementById('m-due').value ||
+    init.progress !== document.getElementById('m-progress').value ||
+    init.status !== modalState.status ||
+    init.projectId !== document.getElementById('m-project').value;
+}
+
 function closeModal() {
   document.getElementById('taskModal').classList.remove('open');
-  editingTaskId = null;
-  editingSubtaskParentId = null;
-  editingSubtaskId = null;
-  modalStatus = 'TODO';
+  modalState = { taskId: null, subtaskParentId: null, subtaskId: null, status: 'TODO' };
   // Re-show project selector and re-enable progress slider
   document.getElementById('m-project-row').style.display = '';
   document.getElementById('m-progress').disabled = false;
@@ -3450,109 +3841,89 @@ function closeModal() {
   document.getElementById('m-created-field').classList.remove('visible');
 }
 
-let readOnlyModalOrigHTML = null;
+function openViewModal(item, source, parentDesc) {
+  if (!item) return;
+  // For trash items, unwrap the data property
+  const taskData = (source === 'trash' && item.data) ? item.data : item;
+  const displayStatus = source === 'onhold' ? (taskData.priorStatus || item.priorStatus || 'TODO')
+    : source === 'archive' ? 'DONE'
+    : taskData.status || 'TODO';
 
-function openReadOnlyModal(item, source) {
-  const modal = document.getElementById('taskModal');
-  const modalInner = modal.querySelector('.modal');
-  if (!readOnlyModalOrigHTML) {
-    readOnlyModalOrigHTML = modalInner.innerHTML;
-  }
+  modalState = { taskId: null, subtaskParentId: null, subtaskId: null, status: displayStatus };
 
-  const statusColors = {
-    'TODO':    { bg: 'var(--todo-dim)', c: 'var(--todo)' },
-    'WORKING': { bg: 'var(--working-dim)', c: 'var(--working)' },
-    'DONE':    { bg: 'var(--done-dim)', c: 'var(--done)' },
-    'ON HOLD': { bg: 'var(--hold-dim)', c: 'var(--hold)' },
-  };
+  const titleMap = { onhold: 'On Hold Task', archive: 'Archived Task', trash: 'Trashed Task' };
+  const title = parentDesc
+    ? (titleMap[source] || 'Task Detail').replace('Task', 'Subtask')
+    : (titleMap[source] || 'Task Detail');
+  populateModal({
+    title,
+    desc: taskData.desc,
+    note: taskData.note,
+    owner: taskData.owner,
+    dueDate: taskData.dueDate,
+    progress: getEffectiveProgress(taskData),
+    progressDisabled: true,
+    status: displayStatus,
+    createdAt: taskData.createdAt,
+    projectId: taskData.projectId,
+  });
 
-  const displayStatus = source === 'onhold' ? (item.priorStatus || 'TODO') : 'DONE';
-  const sc = statusColors[displayStatus] || statusColors['DONE'];
-
-  let meta = '';
-  if (item.owner) meta += `<span>\u{1F464} ${esc(item.owner)}</span>`;
-  if (item.projectName) meta += `<span>\u{1F4C1} ${esc(item.projectName)}</span>`;
-  if (source === 'onhold' && item.heldAt) {
-    const d = new Date(item.heldAt + 'T12:00:00');
-    meta += `<span>\u23F8 Held ${d.toLocaleDateString('en-US', { month:'short', day:'numeric' })}</span>`;
-  }
-  if (source === 'archive' && item.doneAt) {
-    const d = new Date(item.doneAt + 'T12:00:00');
-    meta += `<span>\u2714 Done ${d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })}</span>`;
-  }
-  if (item.createdAt) {
-    const age = taskAge(item.createdAt);
-    const ac = ageClass(item.createdAt);
-    if (age) meta += `<span class="task-age ${ac}">\u23F1 ${age}</span>`;
-  }
-  if (item.dueDate) {
-    const dl = dueDateLabel(item.dueDate);
-    const dc = dueDateClass(item.dueDate);
-    if (dl) meta += `<span class="task-due ${dc}">\u{1F4C5} ${dl}</span>`;
-  }
-
-  let subtasksHtml = '';
-  const subs = item.subtasks || [];
-  if (subs.length > 0) {
-    subtasksHtml += `<div class="modal-readonly-subtasks">`;
-    subtasksHtml += `<div style="font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px">Subtasks (${subs.filter(s=>s.status==='DONE').length}/${subs.length})</div>`;
-    for (const s of subs) {
-      const ssc = statusColors[s.status] || statusColors['TODO'];
-      subtasksHtml += `
-        <div class="modal-readonly-subtask" data-status="${s.status}">
-          <span class="status-pill" style="background:${ssc.bg};color:${ssc.c}">${s.status}</span>
-          <span class="modal-readonly-subtask-desc">${esc(s.desc)}</span>
-          <span class="modal-readonly-subtask-owner">${esc(s.owner || '')}</span>
-        </div>`;
+  // Set breadcrumb — if parentDesc is provided, show "Project > Task" (subtask context)
+  if (parentDesc) {
+    const bc = document.getElementById('modalBreadcrumb');
+    const projName = (taskData.projectName || item.projectName || '');
+    if (bc && projName) {
+      bc.innerHTML = esc(projName) + '<span class="bc-sep">›</span>' + esc(parentDesc);
     }
-    subtasksHtml += `</div>`;
   }
 
-  const effProgress = getEffectiveProgress(item);
-  const progressHtml = renderProgressBar(effProgress);
-  const title = source === 'onhold' ? 'On Hold Task' : 'Archived Task';
+  // Disable all form fields — this is a view-only modal
+  document.getElementById('m-desc').disabled = true;
+  document.getElementById('m-note').disabled = true;
+  document.getElementById('m-owner').disabled = true;
+  document.getElementById('m-due').disabled = true;
+  document.getElementById('m-progress').disabled = true;
+  document.getElementById('m-project').disabled = true;
+  document.getElementById('m-created-override').disabled = true;
 
-  modalInner.innerHTML = `
-    <h3>${title}</h3>
-    <div style="margin-bottom:8px">
-      <span class="status-pill" style="background:${sc.bg};color:${sc.c}">${displayStatus}</span>
-      ${source === 'onhold' ? '<span class="status-pill" style="background:var(--hold-dim);color:var(--hold);margin-left:8px;font-size:9px;padding:3px 7px">PAUSED</span>' : ''}
-    </div>
-    <div class="modal-readonly-desc">${esc(item.desc)}</div>
-    ${item.note ? `<div class="modal-readonly-note">${esc(item.note)}</div>` : ''}
-    <div class="modal-readonly-meta">${meta}</div>
-    ${progressHtml}
-    ${subtasksHtml}
-    <div class="modal-actions" style="margin-top:20px">
-      <button class="btn primary" onclick="closeReadOnlyModal()">Close</button>
-    </div>
-  `;
-  modalInner.classList.remove('task-modal');
-  modal.classList.add('open');
+  // Hide Save button, change Cancel to Close
+  const actions = document.querySelector('#taskModal .modal-actions');
+  if (actions) {
+    actions.innerHTML = `<button class="btn primary" onclick="closeViewModal()">Close</button>`;
+  }
 }
 
-function closeReadOnlyModal() {
-  const modal = document.getElementById('taskModal');
-  modal.classList.remove('open');
-  if (readOnlyModalOrigHTML) {
-    const modalInner = modal.querySelector('.modal');
-    modalInner.innerHTML = readOnlyModalOrigHTML;
-    modalInner.classList.add('task-modal');
-    readOnlyModalOrigHTML = null;
+function closeViewModal() {
+  // Re-enable all fields before closing
+  document.getElementById('m-desc').disabled = false;
+  document.getElementById('m-note').disabled = false;
+  document.getElementById('m-owner').disabled = false;
+  document.getElementById('m-due').disabled = false;
+  document.getElementById('m-progress').disabled = false;
+  document.getElementById('m-project').disabled = false;
+  document.getElementById('m-created-override').disabled = false;
+
+  // Restore Save/Cancel buttons
+  const actions = document.querySelector('#taskModal .modal-actions');
+  if (actions) {
+    actions.innerHTML = `<button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="saveTask()">Save</button>`;
   }
+  closeModal();
 }
 
 document.getElementById('taskModal').addEventListener('click', e => {
   if (e.target === e.currentTarget) {
-    if (readOnlyModalOrigHTML) closeReadOnlyModal();
-    else closeModal();
+    if (document.getElementById('m-desc').disabled) closeViewModal();
+    else if (!isModalDirty() || confirm('Discard unsaved changes?')) closeModal();
   }
 });
 
+// NOTE: Single cycling pill is intentional — click-to-cycle in one location is convenient
+// and the layout stays compact. Three explicit buttons were considered and rejected (v2.0 5.8).
 function cycleModalStatus() {
   const cycle = { TODO: 'WORKING', WORKING: 'DONE', DONE: 'TODO' };
-  modalStatus = cycle[modalStatus] || 'TODO';
-  document.getElementById('m-status').value = modalStatus;
+  modalState.status = cycle[modalState.status] || 'TODO';
+  document.getElementById('m-status').value = modalState.status;
   updateModalPreview();
 }
 
@@ -3560,11 +3931,11 @@ function updateModalPreview() {
   // --- Status pill ---
   const pillEl = document.getElementById('modalStatusPill');
   const sc = {
-    TODO:    { bg: 'var(--todo-dim)',    c: 'var(--todo)',    b: 'rgba(56,189,248,0.3)' },
-    WORKING: { bg: 'var(--working-dim)', c: 'var(--working)', b: 'rgba(245,158,11,0.3)' },
-    DONE:    { bg: 'var(--done-dim)',    c: 'var(--done)',    b: 'rgba(52,211,153,0.3)' },
-  }[modalStatus] || { bg: 'var(--todo-dim)', c: 'var(--todo)', b: 'rgba(56,189,248,0.3)' };
-  pillEl.innerHTML = `<span class="status-pill" style="background:${sc.bg};color:${sc.c};border:1px solid ${sc.b}">${modalStatus}</span>`;
+    TODO:    { bg: 'var(--todo-dim)',    c: 'var(--todo)',    b: 'var(--todo-border)' },
+    WORKING: { bg: 'var(--working-dim)', c: 'var(--working)', b: 'var(--working-border)' },
+    DONE:    { bg: 'var(--done-dim)',    c: 'var(--done)',    b: 'var(--done-border)' },
+  }[modalState.status] || { bg: 'var(--todo-dim)', c: 'var(--todo)', b: 'var(--todo-border)' };
+  pillEl.innerHTML = `<span class="status-pill" style="background:${sc.bg};color:${sc.c};border:1px solid ${sc.b}">${modalState.status}</span>`;
 
   // --- Description ---
   const desc = document.getElementById('m-desc').value.trim();
@@ -3591,32 +3962,25 @@ function updateModalPreview() {
   const owner = document.getElementById('m-owner').value.trim();
   document.getElementById('previewOwner').textContent = owner || '—';
 
-  // --- Age badge ---
+  // --- Badges (age + due date) ---
   let createdAt;
   const overrideChecked = document.getElementById('m-created-override').checked;
   if (overrideChecked) {
     createdAt = document.getElementById('m-created-date').value || null;
-  } else if (editingTaskId) {
-    const task = state.tasks.find(t => t.id === editingTaskId);
+  } else if (modalState.taskId) {
+    const task = state.tasks.find(t => t.id === modalState.taskId);
     createdAt = task ? task.createdAt : null;
-  } else if (editingSubtaskId && editingSubtaskParentId) {
-    const parent = state.tasks.find(t => t.id === editingSubtaskParentId);
+  } else if (modalState.subtaskId && modalState.subtaskParentId) {
+    const parent = state.tasks.find(t => t.id === modalState.subtaskParentId);
     if (parent && parent.subtasks) {
-      const sub = parent.subtasks.find(s => s.id === editingSubtaskId);
+      const sub = parent.subtasks.find(s => s.id === modalState.subtaskId);
       createdAt = sub ? sub.createdAt : null;
     }
   } else {
-    createdAt = new Date().toISOString().split('T')[0];
+    createdAt = today();
   }
-  const age = taskAge(createdAt);
-  const ac = ageClass(createdAt);
-  const ageBadgeHtml = age ? `<span class="task-age ${ac}" title="Created ${createdAt || 'today'}">${age}</span>` : '';
-
-  // --- Due date badge ---
   const dueDate = document.getElementById('m-due').value || '';
-  const dl = dueDateLabel(dueDate);
-  const dc = dueDateClass(dueDate);
-  const dueBadgeHtml = dl ? `<span class="task-due ${dc}" title="Due ${dueDate}">📅 ${dl}</span>` : '';
+  const { ageBadge: ageBadgeHtml, dueBadge: dueBadgeHtml } = renderBadges(createdAt, dueDate, null);
 
   // --- Indicators ---
   document.getElementById('previewIndicators').innerHTML = ageBadgeHtml + dueBadgeHtml;
@@ -3631,8 +3995,8 @@ function updateModalPreview() {
 
 function updateModalBreadcrumb() {
   const bc = document.getElementById('modalBreadcrumb');
-  if (editingSubtaskId && editingSubtaskParentId) {
-    const parent = state.tasks.find(t => t.id === editingSubtaskParentId);
+  if (modalState.subtaskId && modalState.subtaskParentId) {
+    const parent = state.tasks.find(t => t.id === modalState.subtaskParentId);
     if (parent) {
       const proj = state.projects.find(p => p.id === parent.projectId);
       const projName = proj ? esc(proj.name) : 'Unknown Project';
@@ -3654,15 +4018,50 @@ document.getElementById('settingsModal').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeSettings();
 });
 
+document.getElementById('renameModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeRename();
+});
+
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (readOnlyModalOrigHTML) closeReadOnlyModal();
-    else closeModal();
+    const taskModal = document.getElementById('taskModal');
+    if (taskModal.classList.contains('open')) {
+      if (document.getElementById('m-desc').disabled) {
+        closeViewModal();
+      } else if (!isModalDirty() || confirm('Discard unsaved changes?')) {
+        closeModal();
+      }
+    }
     closeSettings();
   }
-  if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !isReadOnly) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey && !isReadOnly) {
     e.preventDefault();
     undo();
+  }
+  // Redo: Ctrl+Y or Ctrl+Shift+Z
+  if (!isReadOnly && (((e.ctrlKey || e.metaKey) && e.key === 'y') ||
+      ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'Z'))) {
+    e.preventDefault();
+    redo();
+  }
+  // Ctrl+Enter: save and close modal
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    const modal = document.getElementById('taskModal');
+    if (modal.classList.contains('open') && !document.getElementById('m-desc').disabled) {
+      e.preventDefault();
+      saveTask();
+    }
+  }
+  // / : focus search bar (only when not in an input/textarea and no modal open)
+  if (e.key === '/' && !isReadOnly) {
+    const tag = document.activeElement.tagName;
+    const taskModal = document.getElementById('taskModal');
+    const settingsModal = document.getElementById('settingsModal');
+    if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT' &&
+        !taskModal.classList.contains('open') && !settingsModal.classList.contains('open')) {
+      e.preventDefault();
+      document.getElementById('searchInput').focus();
+    }
   }
 });
 
@@ -3696,7 +4095,7 @@ function applySettings() {
     const vTag = ` <span id="versionTag">v${APP_VERSION}</span>`;
     if (s.title && s.title.trim()) {
       logo.innerHTML = esc(s.title.trim()) + vTag;
-      document.title = s.title.trim() + ' v' + APP_VERSION;
+      document.title = s.title.trim();
     } else {
       logo.innerHTML = 'ETASKULATOR' + vTag;
       document.title = 'ETASKULATOR v' + APP_VERSION;
@@ -3732,41 +4131,31 @@ function syncSettingsUI() {
   // Notes toggle
   document.getElementById('notesToggle').classList.toggle('on', s.showNotes !== false);
 
+  // Archive purge
+  const purgeSelect = document.getElementById('archivePurgeSelect');
+  if (purgeSelect) purgeSelect.value = s.archivePurge || 'never';
+
+  // Trash purge
+  const trashPurgeSelect = document.getElementById('trashPurgeSelect');
+  if (trashPurgeSelect) trashPurgeSelect.value = s.trashPurge || '30';
+
+  // Strip trash from export
+  const stripTrashEl = document.getElementById('stripTrashToggle');
+  if (stripTrashEl) stripTrashEl.checked = !!s.stripTrashFromExport;
+
   // Custom title
   document.getElementById('customTitleInput').value = s.title || '';
 }
 
-function setTheme(theme) {
-  state.settings.theme = theme;
-  applySettings();
-  syncSettingsUI();
-  saveState();
-}
-
-function setFontSize(size) {
-  state.settings.fontSize = size;
-  applySettings();
-  syncSettingsUI();
-  saveState();
-}
-
-function toggleCompact() {
-  state.settings.compact = !state.settings.compact;
-  applySettings();
-  syncSettingsUI();
-  saveState();
-}
-
-function toggleNotes() {
-  state.settings.showNotes = !state.settings.showNotes;
-  applySettings();
-  syncSettingsUI();
-  saveState();
-}
+function setTheme(theme) { setSetting('theme', theme); }
+function setFontSize(size) { setSetting('fontSize', size); }
+function toggleCompact() { setSetting('compact', !state.settings.compact); }
+function toggleNotes() { setSetting('showNotes', !state.settings.showNotes); }
 
 function setCustomTitle(value) {
   state.settings.title = value;
   applySettings();
+  syncSettingsUI();
   saveState();
 }
 
@@ -3828,17 +4217,9 @@ function toggleSubtaskExpand(taskId) {
   render();
 }
 
-function renderSubtaskBadgeHeld(item) {
-  const subs = item.subtasks || [];
-  if (subs.length === 0) return '';
-  const doneCount = subs.filter(s => s.status === 'DONE').length;
-  return `<span class="subtask-toggle${doneCount === subs.length ? ' all-done' : ''}" style="cursor:default">${doneCount}/${subs.length} subtasks</span>`;
-}
 
 // ── Subtask CRUD ──
 
-let editingSubtaskParentId = null;
-let editingSubtaskId = null;
 
 function quickAddSubtask(parentId, descInput) {
   const bar = descInput.closest('.add-subtask-bar');
@@ -3856,7 +4237,7 @@ function quickAddSubtask(parentId, descInput) {
     note: '',
     owner,
     status: 'TODO',
-    createdAt: new Date().toISOString().split('T')[0],
+    createdAt: today(),
     dueDate: '',
     progress: 0,
   });
@@ -3877,25 +4258,21 @@ function editSubtask(parentId, subtaskId) {
   if (!task || !task.subtasks) return;
   const sub = task.subtasks.find(s => s.id === subtaskId);
   if (!sub) return;
-  editingSubtaskParentId = parentId;
-  editingSubtaskId = subtaskId;
-  editingTaskId = null;
-  modalStatus = sub.status;
-  document.getElementById('modalTitle').textContent = 'Edit Subtask';
-  document.getElementById('m-desc').value = sub.desc;
-  document.getElementById('m-note').value = sub.note || '';
-  document.getElementById('m-owner').value = sub.owner || '';
-  document.getElementById('m-due').value = sub.dueDate || '';
-  document.getElementById('m-progress').value = sub.progress || 0;
-  document.getElementById('m-progress-label').textContent = (sub.progress || 0) + '%';
-  document.getElementById('m-status').value = sub.status;
-  document.getElementById('m-project-row').style.display = 'none';
-  document.getElementById('m-progress').disabled = false;
-  document.getElementById('m-created-override').checked = false;
-  document.getElementById('m-created-field').classList.remove('visible');
-  document.getElementById('m-created-date').value = sub.createdAt || '';
-  document.getElementById('taskModal').classList.add('open');
-  updateModalPreview();
+  modalState.subtaskParentId = parentId;
+  modalState.subtaskId = subtaskId;
+  modalState.taskId = null;
+  modalState.status = sub.status;
+  populateModal({
+    title: 'Edit Subtask',
+    desc: sub.desc,
+    note: sub.note,
+    owner: sub.owner,
+    dueDate: sub.dueDate,
+    progress: sub.progress,
+    status: sub.status,
+    createdAt: sub.createdAt,
+    hideProject: true,
+  });
 }
 
 function cycleSubtaskStatus(parentId, subtaskId) {
@@ -3911,7 +4288,7 @@ function cycleSubtaskStatus(parentId, subtaskId) {
   pushUndo();
   sub.status = next;
   if (next === 'DONE') {
-    sub.doneAt = new Date().toISOString().split('T')[0];
+    sub.doneAt = today();
   }
   // Subtask DONE does NOT auto-archive — stays in place
   saveState();
@@ -3921,11 +4298,11 @@ function cycleSubtaskStatus(parentId, subtaskId) {
 function deleteSubtask(parentId, subtaskId) {
   const task = state.tasks.find(t => t.id === parentId);
   if (!task || !task.subtasks) return;
-  if (!confirm('Delete this subtask? This cannot be undone.')) return;
   pushUndo();
   task.subtasks = task.subtasks.filter(s => s.id !== subtaskId);
   saveState();
   render();
+  showToast('Subtask deleted');
 }
 
 function renderProgressBar(progress) {
@@ -3939,7 +4316,6 @@ function esc(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function uid() { return Math.random().toString(36).substr(2, 9); }
 
 function matchesSearch(item) {
   if (!searchQuery) return true;
@@ -4067,6 +4443,7 @@ function doneVsDueClass(dueDate, doneAt) {
 
 loadState();
 purgeOldTrash();
+purgeOldArchive();
 applySettings();
 initDragAndDrop();
 
@@ -4089,13 +4466,14 @@ if (isReadOnly) {
   document.getElementById('saveAsBtn').style.display = 'none';
   document.getElementById('snapshotBtn').style.display = 'none';
   document.getElementById('newTemplateBtn').style.display = 'none';
-  document.getElementById('addTaskBtn').style.display = 'none';
+  // addTaskBtn removed in 5.9 — quick-add bars in each project group are the primary way to add tasks
   document.getElementById('settingsBtn').style.display = 'none';
   document.getElementById('undoBtn').style.display = 'none';
-  document.getElementById('searchBar').style.display = 'none';
+  document.getElementById('redoBtn').style.display = 'none';
+  // Search bar stays visible in snapshots — search is non-destructive and useful for navigating large agendas
   document.getElementById('save-indicator').style.display = 'none';
   document.getElementById('browserWarning').style.display = 'none';
-  document.getElementById('tab-trash').style.display = 'none';
+  if (!state.trash || state.trash.length === 0) document.getElementById('tab-trash').style.display = 'none';
   const meta = document.querySelector('.header-meta');
   if (meta) {
     const badge = document.createElement('span');
@@ -4105,7 +4483,12 @@ if (isReadOnly) {
   }
 } else {
   window.addEventListener('beforeunload', function(e) {
-    if (isDirty && !fileHandle) {
+    if (isDirty && fileHandle) {
+      // Flush pending debounce — write immediately before tab closes
+      clearTimeout(writeDebounceTimer);
+      writeToFile();
+    } else if (isDirty && !fileHandle) {
+      // No file linked — warn user about unsaved changes
       e.preventDefault();
       e.returnValue = '';
     }
