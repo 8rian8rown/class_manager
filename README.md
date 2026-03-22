@@ -31,21 +31,6 @@ Firefox and Safari work but require manual saves (download button).
 
 Everything is stored as JSON embedded directly in the HTML file between `<!--DATA_BLOCK_START-->` and `<!--DATA_BLOCK_END-->` sentinels. The file modifies itself on save — no external database needed.
 
-## Test Data
-
-The `test_data/` folder contains sample datasets you can import via Settings → Import to try out the app with realistic data.
-
-## Documentation
-
-| File | Description |
-|------|-------------|
-| `CLAUDE.md` | Development guide and conventions |
-| `COMPONENTS_MAP.md` | Full structural map of the HTML file |
-| `STYLE_GUIDE.md` | CSS system, themes, component patterns |
-| `DATA_MODEL.md` | Database schema and task lifecycle |
-| `CHANGELOG.md` | Version history |
-| `WATCHLIST.md` | Known limitations and edge cases |
-
 ## License
 
 Personal project by 8rian 8rown. Not currently licensed for redistribution.
